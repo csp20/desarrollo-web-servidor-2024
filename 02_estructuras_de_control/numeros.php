@@ -80,12 +80,22 @@
     }else {
         $digitos =3;
     }
-    $digitos_texto ="digito";
-    if($digitos==1)
+    $digitos_texto ="digitos";
+    if($digitos==1)$digitos_texto ="digito";
 
     echo "<p> el num $NUM_ALEATORIO TIENE $digitos $digitos_texto </p>";
     
-
+    // match 
+    
+    $digitos = match(true){
+        $NUM_ALEATORIO >= 1  AND $NUM_ALEATORIO < 10 => 1,
+        $NUM_ALEATORIO>= 10 AND $NUM_ALEATORIO <100 => 2,
+        default=> 3
+    };
+    
+    
+    
+    
     // num aleatorio decimales 
 
 
@@ -103,6 +113,13 @@
             
     }
 
+
+        $resultado = match ($n) {
+          1   => " es el num 1 ",
+          2  => " es el num 2 ",
+          3   => " es el num 3 ",
+        };
+        echo $resultado;
     ?>
 
 

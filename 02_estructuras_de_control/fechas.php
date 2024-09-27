@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fechas</title>
+    <?php 
+    error_reporting( E_ALL);
+    ini_set ("display_errors", 1);
+    ?>
 </head>
 <body>
     <?php 
@@ -36,7 +40,7 @@
         echo "<h1> $hora_exacta </h1>"
 
     if($hora>6 and &hora<11)
-    */
+    
 
     //$dia = date ("l");
     $dia = "Tuesday";
@@ -55,7 +59,45 @@
         echo "<h2> hoy  NO tenemos clase</h2>";
            
     }
+        */
+
+    //$dia = date ("l");
+    $dia = "Friday";
+    //echo "<h2> hoy es $dia </h2>";
+
+    // tenemos clase lunes miercoles y viernes 
+
+    switch ($dia) {
+        case "Monday";
+            echo "<h2>hoy es lunes</h2>";
+        case "Wednesday" :
+            echo "<h2>hoy es miercoles</h2>";
+        case "Friday":
+            echo "<h2>hoy es viernes </h2>";
+            echo "<h2> ,hoy hay clase</h2>";
+            break;
+        
+        default:
+        echo "<h2> hoy es $dia NO tenemos clase</h2>";
+           
+    }
+    $dia = date ("l");
+    $diaespañol =null;
+
+    $diaespañol = match ($dia) {
+    "Monday" => "lunes" ,
+    "Tuesday"=> "martes",
+    "Wednesday"=> "miercoles",
+    "Thursday" => "jueves",
+    "Friday" => "viernes"
+    //etc
+    };
+
+    
+
     ?>
+
+    
 
    
 
