@@ -33,7 +33,7 @@
 
     $mes = date("n");
     $mes = match ($mes) {
-      "1"  => "enero",
+       "1"  => "enero",
        "2"  => "febrero",
        "3" => "marzo",
        "4" => "abril",
@@ -52,7 +52,44 @@
 
     echo "$diaHoy $dia_n $mes   $anno";
     ?>
+        <!--EJERCICIO 2 mostrar los num multiplos de 3 usando while e if-->
+    <?php  /*
+        $i = 1;
+        $num =3;
+        while($i>0):
+            $num = $i *3;
+            $i ++;
+            echo "<h3> $num  </h3> ";
+            if ($num>=36) {
+                $i =0;
+            }
+        endwhile;*/
 
+    ?>
+
+
+
+    <!--ejercicio 3 CALCULAR LA SUMA DE LOS NUM PARES ENTRE 1 Y 20--> 
+    <?php  /*
+        $num =0;
+        for($i=1; $i<=20; $i++):    
+            $i++;
+            $num = $num + $i;
+        endfor;
+        echo $num;*/
+    ?>
+    <!--EJERCICIO 4 calcular el factorial de 6 -->
+    <br>
+    <br>
+    <?php
+        $num = 1;
+        for($i=1; $i<=6; $i++):    
+            $num = $i * $num;
+           // echo "<h3> $num  </h3> ";
+        endfor;
+        echo "<h3> $num  </h3> ";
+
+    ?>
 
 
 </body>
