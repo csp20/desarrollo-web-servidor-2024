@@ -52,6 +52,7 @@
 
     echo "$diaHoy $dia_n $mes   $anno";
     ?>
+    <h3>EJERCICIO 2 </h3>
         <!--EJERCICIO 2 mostrar los num multiplos de 3 usando while e if-->
     <?php  /*
         $i = 1;
@@ -63,11 +64,22 @@
             if ($num>=36) {
                 $i =0;
             }
-        endwhile;*/
+        endwhile;
 
+
+        otra forma de hacerlo
+
+         $i = 1;
+         while($i<=100):
+            if($i %3 ==0);
+            echo "<ul> $num  </ul> ";
+         endif;
+         $i++;
+        endwhile;
+*/
     ?>
 
-
+<h3>EJERCICIO 3 </h3>
 
     <!--ejercicio 3 CALCULAR LA SUMA DE LOS NUM PARES ENTRE 1 Y 20--> 
     <?php  /*
@@ -76,8 +88,29 @@
             $i++;
             $num = $num + $i;
         endfor;
-        echo $num;*/
+        echo $num;
+
+
+        OTRA FORMA DE HACERLO
+
+        $=i;
+        $suma=0;
+        while($i<=20){
+            if($i %2 ==0){
+            $suma +=$i;
+            }
+            $i++;
+
+        }
+            echo "<p>la suma es $suma </p>"
+        */
     ?>
+
+
+
+
+
+
     <!--EJERCICIO 4 calcular el factorial de 6 -->
     <br>
     <br>
@@ -89,7 +122,46 @@
         endfor;
         echo "<h3> $num  </h3> ";
 
+        /*
+        otra forma de hacerlo
+        
+        $factorial = 6;
+        $resultado = 1;
+        $i =1;
+        while($i <= $factorial){
+            $resultado *= $i;
+
+            $i++;
+
+        }
+            <!--EJERCICIO 5 muestra los 50 primeros num primos -->
+            q solo sean divisibles por 1 o si mismo ej: 5 7 13 etc 
+            usando un bucle de 2 a n-1
+          */
     ?>
+    <?php
+         $numero =2;
+         $numeroprimos= 0;
+         echo "<ol>";
+    while ($numeroprimos<50) {
+        $primo= true;
+        for ($j=2; $j<$numero; $j++) { 
+               if ($numero % j==0) {
+                $primo= false;
+                break;
+            }
+        }
+        if($esprimo)$numeroprimos++; echo "<li> $numero </li>";
+        $numero++;
+           
+    }
+       echo "</ol>";
+    ?>
+
+    
+          
+
+        
 
 
 </body>

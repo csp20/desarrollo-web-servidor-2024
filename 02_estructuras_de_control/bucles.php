@@ -34,5 +34,52 @@
     <!--EJERCICIO 2 mostrar los num multiplos de 3 usando while e if-->
     <!--ejercicio 3 CALCULAR LA SUMA DE LOS NUM PARES ENTRE 1 Y 20 -->
     <!--EJERCICIO 4 calcular el factorial de 6 -->
+
+
+    ?>
+    <h1> listas FOR</h1>
+    <?php
+        echo "<ul>";
+        for ($i=0; $i <=10 ; $i++) { 
+            echo $i;
+        }
+        echo "</ul>";
+
+    ?>
+    <h1> listas FOR ALTERNATIVA</h1>
+    <?php
+        echo "<ul>";
+        for ($i=0; $i <=10 ; $i++):
+            echo $i;
+        endfor;
+        echo "</ul>";
+
+    ?>
+    <h1> listas FOR BRAKE cursed </h1>
+    <?php
+        echo "<ul>";
+        for ($i=0; ; $i++):
+            if($i>10){
+                break;
+            }
+            echo "<li> $i </li>";
+        endfor;
+        echo "</ul>";
+
+
+    ?>
+    <?php
+        echo "<ul>";
+        $i=0;
+        for ( ; ; ):
+            if($i>10){
+                break;
+            }
+            echo "<li> $i </li>";
+            $i++;
+        endfor;
+        echo "</ul>";
+
+    ?>
 </body>
 </html>
