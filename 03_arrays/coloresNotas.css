@@ -1,3 +1,19 @@
-.colores{
-    color: red;
+.suspenso{
+    color: white;
+    background-color: red;
+}
+.table{
+    border: 2px;
+}
+.bien{
+    color: white;
+    background-color: blue;
+}
+.notable{
+    color: white;
+    background-color: purple;
+}
+.sobresaliente{
+    color: white;
+    background-color: green;
 }
