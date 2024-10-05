@@ -109,18 +109,93 @@
                 echo"</tr>";
             }
             ?>
-
-        <!--
-            insertar 2 nuevos alumnos con notas aleatorias entre 0 y 10
-
-            borrar un estudiante por clave
-
-            mostrar en una nueva tabla ordenado por nombres alfabeticamente
-
-            mostrar en una tabla todo ordenado por la nota de 10 a 9 (orden inverso)
-
-        -->
         </tbody>
     </table>
+        <!--
+            EJERCICIO 3 
+            A)insertar 2 nuevos alumnos con notas aleatorias entre 0 y 10
+
+            B) borrar un estudiante por clave
+
+            C)mostrar en una nueva tabla ordenado por nombres alfabeticamente
+
+            D)mostrar en una tabla todo ordenado por la nota de 10 a 9 (orden inverso)
+
+        -->
+        <!-- A)-->
+            <?php
+            $alumnos = [
+                "sergio" => 3,
+                "juanjo" => 5,
+                "vieira" => 10,
+                "isma" => 4,
+                "paula" => 6, 
+                "german"=> 7, 
+                "manuva"=> rand($min =0, $max =10),
+                "luish"=> rand($min =0, $max =10),
+            ];
+            // B)
+            unset($alumnos["sergio"]);
+            ?>
+        <!-- C) -->
+
+    <table border="2px">
+        <caption> ALUMNOS</caption>
+        <thead>
+            <tr>
+                <th> alumnos</th>
+                <th> notas </th>
+                <th> calificacion</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <?php 
+             ksort($alumnos);
+
+            foreach ($alumnos as $alumno => $nota) {?>
+              <tr>
+                <td><?php echo $alumno ?>  </td>
+                <td><?php echo $nota ?>  </td>
+                <?php
+                if ($nota<5)echo '<td class="suspenso"> suspenso </td>';
+                elseif($nota >=5 AND ($nota<7))echo '<td class="bien"> bien </td>';
+                elseif($nota >=7 AND ($nota<9))echo '<td class="notable"> notable </td>';
+                elseif($nota >=9 )echo '<td class="sobresaliente"> sobresaliente </td>';
+                else echo "<td> error </td>";?>
+              </tr>
+           <?php } ?>
+        </tbody>
+    </table>  
+       
+        <!-- D)-->
+    <table border="2px">
+        <caption> ALUMNOS</caption>
+        <thead>
+            <tr>
+                <th> alumnos</th>
+                <th> notas </th>
+                <th> calificacion</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <?php 
+             arsort($alumnos);
+
+            foreach ($alumnos as $alumno => $nota) {?>
+              <tr>
+                <td><?php echo $alumno ?>  </td>
+                <td><?php echo $nota ?>  </td>
+                <?php
+                if ($nota<5)echo '<td class="suspenso"> suspenso </td>';
+                elseif($nota >=5 AND ($nota<7))echo '<td class="bien"> bien </td>';
+                elseif($nota >=7 AND ($nota<9))echo '<td class="notable"> notable </td>';
+                elseif($nota >=9 )echo '<td class="sobresaliente"> sobresaliente </td>';
+                else echo "<td> error </td>";?>
+              </tr>
+           <?php } ?>
+        </tbody>
+    </table>   
 </body>
 </html>

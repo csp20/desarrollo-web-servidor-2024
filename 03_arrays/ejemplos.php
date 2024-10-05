@@ -40,7 +40,7 @@
     array_push($animales, "morsa");
     $animales[]= "tiburon";
 
-    //borrar animales epecificandoclaves
+    //borrar animales epecificando claves
     unset($animales["a2"]);
 
     //eliminar clave y poner orden numerico 
