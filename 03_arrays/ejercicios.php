@@ -124,6 +124,7 @@
         -->
         <!-- A)-->
             <?php
+            //$alumnos["paula"]= rand(0,10);
             $alumnos = [
                 "sergio" => 3,
                 "juanjo" => 5,
@@ -151,7 +152,7 @@
         </thead>
         <tbody>
             <?php 
-             ksort($alumnos);
+             krsort($alumnos);
 
             foreach ($alumnos as $alumno => $nota) {?>
               <tr>
