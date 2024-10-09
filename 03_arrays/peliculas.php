@@ -78,7 +78,8 @@
      * C). MOSTRAR OTRA TABLA TODAS LAS COLUMNAS Y ORDENAR EN ESTE ORDEN
      *  1. GENERO
      *  2. AÑO
-     *  3.TITULO ALFABETICO Y AÑO RECIENTE A ANTIGUO
+     *  3.TITULO 
+     *  ALFABETICO Y AÑO RECIENTE A ANTIGUO
      * 
      * 
      */
@@ -93,25 +94,25 @@
 
 
 
-        
+
 //SEGUIR POR AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 
 
 
 
-        $_titulo = array_column($videojuegos, 0);
-        $_categoria = array_column($videojuegos, 1);
-        $_precio = array_column($videojuegos, 2);
+        $_titulo = array_column($peliculas, 0);
+        $_categoria = array_column($peliculas, 1);
+        $_anio = array_column($peliculas, 2);
 
         //array_multisort($_titulo, SORT_DESC); descendente
         //array_multisort($_categoria, SORT_ASC, $videojuegos);
         array_multisort($_categoria, SORT_ASC,
-                        $_precio, SORT_DESC,
-                        $_titulo,SORT_DESC,
-                        $videojuegos);
-
-    ?>
+                        $_anio, SORT_DESC,
+                        $_titulo,SORT_ASC,
+                        $peliculas);
+        
+    ?><br>
      <table border="1px">
         <thead>
             <tr>
