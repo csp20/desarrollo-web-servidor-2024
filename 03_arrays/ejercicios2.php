@@ -51,7 +51,7 @@
 
 
     ?>
-    <!-- Dada la lista de países y sus capitales mostrada en la
+    <!-- EJ 3) Dada la lista de países y sus capitales mostrada en la
          siguiente página, muéstralos en una tabla ordenados por los
          nombres de sus países.-->
     <?php
