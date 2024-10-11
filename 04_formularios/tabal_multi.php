@@ -13,7 +13,7 @@
     2 x 2 = 4
 
 -->
-
+             <!--   // method="post" esta mal se hace un get-->
 <form action="" method="post">
         <p>nombre</p>
         <input type="text" name="num">
