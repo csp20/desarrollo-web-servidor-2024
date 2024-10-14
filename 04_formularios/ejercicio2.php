@@ -17,7 +17,7 @@
 
         Los múltiplos de 2 entre 3 y 10 son: 4, 6, 8 y 10-->
     <form action="" method="post"> 
-        <p>multiplos de c</p>
+        <label>multiplos de c</label>
         <input type="text" name="num1">
         <br>
         <input type="text" name="num2">

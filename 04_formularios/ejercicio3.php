@@ -29,7 +29,7 @@
         $num1 = $_POST["num1"];
         $num2 = $_POST["num2"];      
     }
-    
+
     ?>
         <select name="iva">
         <?php
@@ -42,6 +42,18 @@
                 $num++;
             }
             ?>
+            <!--$count = 0;
+            for($i = $num; $i <= $num2; $i++){
+                for($j = 1; $j <= $i; $j++){
+                    if($i % $j == 0){
+                        $count++;
+                        
+                    }
+                }
+                if($count == 2){
+                    echo "<p>$i</p>";
+                }
+                $count = 0;-->
         
         </select> 
     
