@@ -51,5 +51,73 @@
             ?>
         </tbody>
     </table>
+
+    <?php
+    //variable auxiliares que si quiero reordenar tengo que volver a escribirlas y machacarlas
+    $_titulo = array_column($series, 0);
+    $_plataforma = array_column($series, 1);
+    $_temporada = array_column($series, 2);
+
+    //array_multisort($_titulo, SORT_DESC); descendente
+    //array_multisort($_categoria, SORT_ASC, $videojuegos);
+    array_multisort($_temporada, SORT_ASC,$series);
+    ?>
+    <table border="1px">
+        <caption>series</caption>
+        <thead>
+            <tr>
+                <th>titulo</th>
+                <th>plataforma</th>
+                <th>temporada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($series as $serie){
+
+                list($titulo,$plataforma,$temporada)= $serie;
+                echo "<tr>";
+                echo "<td>$titulo </td>";
+                echo "<td>$plataforma</td>";
+                echo "<td>$temporada</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
+    //variable auxiliares que si quiero reordenar tengo que volver a escribirlas y machacarlas
+    $_titulo = array_column($series, 0);
+    $_plataforma = array_column($series, 1);
+    $_temporada = array_column($series, 2);
+
+    //array_multisort($_titulo, SORT_DESC); descendente
+    //array_multisort($_categoria, SORT_ASC, $videojuegos);
+    array_multisort($_plataforma, SORT_ASC,
+                    $_titulo, SORT_ASC, $series);
+    ?>
+    <table border="1px">
+        <caption>series</caption>
+        <thead>
+            <tr>
+                <th>titulo</th>
+                <th>plataforma</th>
+                <th>temporada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($series as $serie){
+
+                list($titulo,$plataforma,$temporada)= $serie;
+                echo "<tr>";
+                echo "<td>$titulo </td>";
+                echo "<td>$plataforma</td>";
+                echo "<td>$temporada</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
 </html>

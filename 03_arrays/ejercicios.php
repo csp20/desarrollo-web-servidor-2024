@@ -198,5 +198,23 @@
            <?php } ?>
         </tbody>
     </table>   
+    <?php
+    /*
+    sort(): Ordena los elementos de un array en orden ascendente
+
+    rsort(): Ordena los elementos de un array en orden descendente
+
+    asort(): Ordena un array asociativo en orden ascendente,
+    manteniendo la asociación de las claves.
+
+    arsort(): Ordena un array asociativo en orden descendente,
+     manteniendo la asociación de las claves.
+    
+    ksort(): Ordena un array asociativo por clave en orden ascendente
+
+    krsort(): Ordena un array asociativo por clave en orden descendente
+    
+    */
+    ?>
 </body>
 </html>
