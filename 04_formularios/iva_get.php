@@ -17,7 +17,7 @@
      10 IVA =GENERAL PVP 12,1
      10 IVA = REDUCID0 PVP 11
      -->
-     <form action="" method="post">
+     <form action="" method="get">
         <label for="precio">precio</label>
         <input type="text" name="precio" id="precio">
         <br><br>
@@ -31,22 +31,25 @@
      </form>
 
     <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $precio = $_POST["precio"];
-        $iva = $_POST["iva"];
-       
-        if ($precio != '' and $iva != '') {
-            //vardump($precio);
-           $pvp=  match ($iva) {
-              "general"   => $precio * 1.21,
-              "reducido"  =>  $precio * 1.10,
-              "superreducido" =>$precio * 1.04,
-            };
-            echo "<h3>el PVP es $pvp</h3>";
-           }else {
-            echo "<h3>te faltan datos primo  </h3>";
-        }
+    //isset (is set) devuelve true si la variable existe
+    if (isset($_GET["precio"]) and isset($_GET["iva"])) {
+        $precio = $_GET["precio"];
+        $iva = $_GET["iva"];
+       if ($precio != '' and $iva != '') {
+        //vardump($precio);
+       $pvp=  match ($iva) {
+          "general"   => $precio * 1.21,
+          "reducido"  =>  $precio * 1.10,
+          "superreducido" =>$precio * 1.04,
+        };
+        echo "<h3>el PVP es $pvp</h3>";
+       }else {
+        echo "<h3>te faltan datos primo  </h3>";
+       }
+        
+    
     }
+        
     
     ?>
    
