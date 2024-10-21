@@ -26,7 +26,6 @@
         <br>
         <input type="submit" value="enviar">
         
-
     </form>
     <?php
     if($_SERVER["REQUEST_METHOD"] == "POST"){
