@@ -46,29 +46,21 @@
             if (filter_var($tmp_precio,FILTER_VALIDATE_FLOAT) !== FALSE) {
                 if ($tmp_precio>0) {
                     $precio = $tmp_precio;
-                }else {
-                    echo "<p> el num debe ser mayor o igual que cero</p>";
-                }
-            }else {
-                echo "<p> el num debe ser un num</p>";
-            }
-        }else {
-            echo "<p> el num es obligatoria</p>";
-        }
+                }else echo "<p> el num debe ser mayor o igual que cero</p>";
+            }else echo "<p> el num debe ser un num</p>";
+        }else echo "<p> el num es obligatoria</p>";
         if ($tmp_iva == '') {
             echo "<p> el num es obligatoria</p>";
         }else {
            $valores_validos_iva = ["general", "reducido", "superreducido"];
            if (!in_array($tmp_iva,$valores_validos_iva)) {
             echo "<p> el iva solo puede ser general reducido o superredus</p>";
-           }else{
-            $iva = $tmp_iva;
-           }
+           }else  $iva = $tmp_iva;
         }
 
 
         if (isset($iva) and isset($precio)) {
-            $hacienda = irpfcalc($num1);
+            $hacienda = calcularIVA($precio,$iva);
             echo "<h3>$hacienda</h3>";
         }
         
