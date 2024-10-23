@@ -5,7 +5,6 @@ function superpotencia($potencia, $base){
         $res = $res * $base;
         
     }
-    if ($potencia ==0) $res == 1;
-    echo "<h1>$res</h1>";
+    return $res;
 }
 ?>

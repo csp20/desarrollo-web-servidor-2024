@@ -7,6 +7,7 @@
     <?php
     error_reporting( E_ALL);
     ini_set ("display_errors", 1);
+    require('../05_funciones/irpf_fun.php');
     ?>
 </head>
 <body>
@@ -20,39 +21,26 @@
     </form>
     <?php
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $num1 = $_POST["num1"];
-        $res =0;
+        $tmp_num1 = $_POST["num1"];
+        
+        if ($tmp_num1 != '') {
+            if (filter_var($tmp_num1,FILTER_VALIDATE_FLOAT) !== FALSE) {
+                if ($tmp_num1>0) {
+                    $num1 = $tmp_num1;
+                }else {
+                    echo "<p> el num debe ser mayor o igual que cero</p>";
+                }
+            }else {
+                echo "<p> el num debe ser un num</p>";
+            }
+        }else {
+            echo "<p> el num es obligatoria</p>";
+        }
 
-       if ($num1 >0 && $num1<= 12450) {
-        $res = $num1 -($num1 * 0.19);
-       }elseif ($num1 >12450  && $num1<= 20199 ) {
-        $res =$num1 -($num1 * 0.19);
-        $res +=$num1 -($num1 * 0.24);
-       }elseif ($num1 >20199  && $num1<= 35199 ) {
-        $res =$num1 -($num1 * 0.19);
-        $res +=$num1 -($num1 * 0.24);
-        $res +=$num1 -($num1 * 0.30);
-       }elseif ($num1 >35199 && $num1<= 59999 ) {
-        $res =$num1 -($num1 * 0.19);
-        $res +=$num1 -($num1 * 0.24);
-        $res +=$num1 -($num1 * 0.30);
-        $res +=$num1 -($num1 * 0.37);
-       }elseif ($num1 >59999  && $num1<= 299999  ) {
-        $res =$num1 -($num1 * 0.19);
-        $res +=$num1 -($num1 * 0.24);
-        $res +=$num1 -($num1 * 0.30);
-        $res +=$num1 -($num1 * 0.37);
-        $res +=$num1 -($num1 * 0.45);
-       }elseif ($num1 >299999  && $num1< 300000  ) {
-        $res =$num1 -($num1 * 0.19);
-        $res +=$num1 -($num1 * 0.24);
-        $res +=$num1 -($num1 * 0.30);
-        $res +=$num1 -($num1 * 0.37);
-        $res +=$num1 -($num1 * 0.45);
-        $res +=($num1 * 0.47);
-       }
-       $hacienda = $num1-$res;
-       echo "<h3>$hacienda</h3>";
+        if (isset($num1)) {
+            $hacienda = irpfcalc($num1);
+            echo "<h3>$hacienda</h3>";
+        }
     }
 
     ?>

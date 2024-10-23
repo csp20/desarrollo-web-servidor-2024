@@ -27,7 +27,7 @@
     } elseif ($tipo == $tipo2) {
         $temperaturaFinal = $temperaturaInicial;
     }
-    echo "<h3>La temperatura convertida es: $temperaturaFinal </h3>";
+        return $temperaturaFinal ;
        
 
 

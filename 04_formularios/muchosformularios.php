@@ -115,10 +115,39 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         if ($_POST["accion"] == "formulario_potencias") {
-            $potencia =$_POST["potencia"];
-            $base =$_POST["base"];
+            
+            $tmp_base =$_POST["base"];
+            $tmp_potencia =$_POST["potencia"];
+            
+            if ($tmp_base != '') {
+                if (filter_var($tmp_base,FILTER_VALIDATE_INT) !== FALSE) {
+                    $base = $tmp_base;
+                }else {
+                    echo "<p> la base debe ser un num</p>";
+                }
+            }else {
+                echo "<p> la base es obligatoria</p>";
+            }
 
-            superpotencia($potencia, $base);
+            if ($tmp_potencia != '') {
+                if (filter_var($tmp_potencia,FILTER_VALIDATE_INT) !== FALSE) {
+                    if ($tmp_potencia>=0) {
+                        $potencia = $tmp_potencia;
+                    }else {
+                        echo "<p> la potencia debe ser mayor o igual que cero</p>";
+                    }
+                }else {
+                    echo "<p> la potencia debe ser un num</p>";
+                }
+            }else {
+                echo "<p> la ppotencia es obligatoria</p>";
+            }
+
+            if (isset($base)&& isset($potencia)) {
+                $res =  superpotencia($potencia, $base);
+                echo "<p> la potencia es $res</p>";
+            }
+           
         }
         
     }
