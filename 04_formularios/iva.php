@@ -39,8 +39,13 @@
             }else $error_precio =  " el num debe ser un num";
         }else $error_precio =  " el num es obligatoria ";
 
-
-
+        //[a-z A-ZáéíóúÁÉÍÓÚÑñ]+
+        //[a-z A-ZáéíóúÁÉÍÓÚÑñ]{}
+        //[0-9]+
+        //[0-9]{1,8} solo hasta 8 num max
+        //[1-9][0-9]{1,7} coge nums pero no si empieza por cero
+        //[0-9]{8}[A-Z] DNI
+        //P\[0-9]{4}
         if ($tmp_iva == '') {
             $error_iva =  " el num es obligatoria";
         }else {
