@@ -68,8 +68,8 @@
  
                  }else{
                      $apellidos = $error_apellidos;
-                 }
-             }
+                }
+            }
         }
         
 
