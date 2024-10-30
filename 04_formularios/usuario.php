@@ -27,7 +27,7 @@
             $tmp_nombre = $_POST["nombre"];
             $tmp_apellidos = $_POST["apellidos"];
         }
-        if ($tmp_usuario == "") {
+        if ($tmp_usuario = "") {
             $error_usuario = "el usuario es obligatorio";
         }else{
             //letras a-z A-Z nums y _ 
@@ -38,7 +38,7 @@
                 $usuario = $tmp_usuario;
             }
         }
-        if ($tmp_nombre == "") {
+        if ($tmp_nombre = "") {
           $error_usuario = "el nombre es obligatorio";
 
         }else {
@@ -55,7 +55,7 @@
                 }
             }
         } 
-        if ($tmp_apellidos == "") {
+        if ($tmp_apellidos = "") {
             $error_apellidos = "el apellido es obligatorio";
         }else{
             if (strlen($tmp_apellidos) < 2 || strlen($tmp_apellidos) >40) {
