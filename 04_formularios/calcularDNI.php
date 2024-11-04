@@ -24,17 +24,11 @@ correo bien formado y array de 3 palabras banned (funcion str_contains)
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmp_nombre = $_POST["nombre"];
-        //$tmp_nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";
         $tmp_apellido1 = $_POST["apellido1"];
-        //$tmp_apellido1 = isset($_POST["apellido1"]) ? $_POST["apellido1"] : "";
         $tmp_apellido2 = $_POST["apellido2"];
-        //$tmp_apellido2 = isset($_POST["apellido2"]) ? $_POST["apellido2"] : "";
         $tmp_DNI = $_POST["DNI"];
-        //$tmp_DNI = isset($_POST["DNI"]) ? $_POST["DNI"] : "";
-        //$tmp_fecha = $_POST["fecha"];
-        //$tmp_fecha = isset($_POST["fecha"]) ? $_POST["fecha"] : "";
+        $tmp_fecha = $_POST["fecha"];
         $tmp_correo = $_POST["correo"];
-        //$tmp_correo = isset($_POST["correo"]) ? $_POST["correo"] : "";
 
         validarnombre($tmp_nombre);
         validarapellido1($tmp_apellido1);
