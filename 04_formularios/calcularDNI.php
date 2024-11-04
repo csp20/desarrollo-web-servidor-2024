@@ -85,8 +85,55 @@ correo bien formado y array de 3 palabras banned (funcion str_contains)
        <h1><?php echo $nombre ?> </h1>
        <h1><?php echo $apellido1 ?> </h1>
        <h1><?php echo $apellido1 ?> </h1>
-       <?php }?>
+    <?php }?>
+    <!-- PASAR AL CODIGO DE ALEJANDRA
+                                        } elseif($anno_actual - $anno > 121) {
+                        $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                    } elseif($anno_actual - $anno == 121) {
+                        if($mes_actual - $mes > 0) {
+                            $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                        } elseif($mes_actual - $mes == 0) {
+                            if($dia_actual - $dia >= 0) {
+                                $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                            } else {
+                                $fecha_nacimiento = $tmp_fecha_nacimiento;
+                            }
+                        } elseif($mes_actual - $mes < 0) {
+                            $fecha_nacimiento = $tmp_fecha_nacimiento;
+                        } 
 
-   
+
+                        revisar codigo alejandra igualmente
+                        //funcion pa minisculas y mayuscual la primera letra 
+                        $nombre = ucwords (strtolower($tmp_nombre));
+
+                        // ignora la efectividad de las etiquetas html
+                        $tmp_nombre = htmlspecialchars($_POST["nombre"]);
+
+                        function depurar(string $entrada) : string {
+                            $salida = htmlspecialchars($entrada);//esto nos pone en modo texto cualquier cosa por si nos mete scripts y demas
+                            $salida = trim($salida); // esto lo que hace es quitar los espacios de los laterales
+                            $salida = stripslashes($salida); // esto te quita muchos \ que te puedan hacer bugs dentro de la aplicacion.
+                            $salida = preg_replace('!\s!', ' ', $salida); //esto nos quita todos los espacios sobrantes dentro de la cadena
+                            return $salida;
+                        
+                        }
+                            aplicar a todos los campos pa comprobar
+
+                            https://github.com/Anaya-Multimedia/curso-de-php-8-y-mysql-8
+
+
+    en fecha -->
+    <!-- 
+   -titulo = 1-80 caracteres, cualquier caracter
+    -consola = Nintendo Switch, PS5, PS4, Xbox Series X/S, PC
+	(radio button)
+    -fecha de lanzamiento = el videojuego mas antiguo admisible será del 1 de enero de 1947, y el más en el futuro no podrá dentro de más de 5 años (dinámico)
+    -pegi = 3,7,12,16,18 (select)
+    -descripcion = 0-255 caracteres, cualquier caracter (campo opcional) - (text area)
+
+    - LIMPIAR LOS DATOS DEL FORMULARIO Y VALIDARLOS
+    - MOSTRAR TODO POR PANTALLA
+    -->
 </body>
 </html>

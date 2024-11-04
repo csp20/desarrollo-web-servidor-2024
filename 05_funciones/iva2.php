@@ -1,5 +1,5 @@
-<?php
-function iva($precio, $iva){
+<?php 
+function iva(int | float $precio, string $iva) : float{
 
 if ($precio != '' and $iva != '') {
     //vardump($precio);

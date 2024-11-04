@@ -1,5 +1,5 @@
 <?php
-function calcularIVA($precio,$iva){
+function calcularIVA(int | float $precio,$iva) : float{
     $pvp=  match ($iva) {
         "general"   => $precio * 1.21,
         "reducido"  =>  $precio * 1.10,
@@ -10,7 +10,7 @@ function calcularIVA($precio,$iva){
 
 
 
-function irpfcalc($num1){
+function irpfcalc(int |float $num1) : float{
     $res =0;
     if ($num1 >0 && $num1<= 12450) {
         $res = $num1 -($num1 * 0.19);
