@@ -32,7 +32,7 @@
     <?php
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmp_titulo = $_POST["titulo"];
-        $tmp_consola = isset($_POST["consola"]);
+        $tmp_consola = isset($_POST["consola"]);//preguntaaaaaaaar
         $tmp_fecha = $_POST["fecha"];
         $tmp_pegi = isset($_POST["pegi"]);
 
@@ -72,7 +72,7 @@
             if(!preg_match($patron, $tmp_fecha)) {
                 $error_fecha = "Formato de fecha incorrecto";
 
-            }else {
+            }else { // preguntaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar
                 $tmp_fecha = strtotime($tmp_fecha);
                 $fecha_min = strtotime("1957-01-01");
                 $fecha_max = strtotime((new DateTime())->modify('+5 years')->format('Y-m-d'));
@@ -146,7 +146,47 @@
             <h1><?php echo $consola ?></h1>
             <h1><?php echo $fecha ?></h1>
             <h1><?php echo $pegi ?></h1>
-        <?php } ?>
-    </div>
+        <?php } 
+        
+        //revisar code alejandra(alesa95)-> videojuegos.php
+        //comparar y corregir
+        
+        ?>
+        <!-- ¡Claro! Aquí tienes una receta sencilla y deliciosa de habichuelas rojas guisadas:
+
+Ingredientes:
+1 libra de habichuelas rojas (pueden ser frescas o enlatadas)
+1 cebolla pequeña, finamente picada
+1 pimiento verde, finamente picado
+2 dientes de ajo, finamente picados
+1 taza de salsa de tomate
+1 cucharadita de orégano
+1 cucharadita de comino
+1 hoja de laurel
+2 cucharadas de aceite de oliva
+Sal y pimienta al gusto
+4 tazas de agua o caldo de pollo
+Instrucciones:
+Preparar las habichuelas: Si usas habichuelas secas, déjalas en remojo durante la noche. Luego, cocínalas en agua hasta que estén tiernas. Si usas habichuelas enlatadas, simplemente escúrrelas y enjuágalas.
+Sofrito: En una olla grande, calienta el aceite de oliva a fuego medio. Añade la cebolla, el pimiento y el ajo. Sofríe hasta que la cebolla esté transparente.
+Añadir condimentos: Agrega la salsa de tomate, el orégano, el comino y la hoja de laurel. Cocina por unos minutos hasta que los sabores se mezclen bien.
+Cocinar las habichuelas: Añade las habichuelas y el agua o caldo de pollo. Lleva a ebullición, luego reduce el fuego y deja cocinar a fuego lento durante unos 30 minutos, o hasta que las habichuelas estén bien cocidas y el líquido se haya reducido un poco.
+Ajustar sabor: Sazona con sal y pimienta al gusto. Si prefieres una consistencia más espesa, puedes machacar algunas habichuelas contra el lado de la olla y mezclarlas bien.
+Servir:
+Sirve las habichuelas rojas guisadas con arroz blanco o como acompañamiento de tu plato principal favorito. ¡Disfruta!-->
+    
+
+
+<!--Malaga C.F
+Equipos de la liga
+- Nombre (letras con tilde, ñ, espacios en blanco y punto)
+- Inicial (3 letras)
+- Liga (select con las opciones. Liga EA Sports, Liga Hypermotion, Liga Primera RFEF)
+- Ciudad (letras con tilde, ñ, ç y espacios en blanco)
+- Tiene titulo liga (select con si o no)
+- Fecha de fundacion (entre hoy y el 18 de diciembre de 1889)
+- Numero de jugadores (entre 22 y 32)
+-->
+</div>
 </body>
 </html>
