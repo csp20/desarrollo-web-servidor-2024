@@ -54,35 +54,36 @@
             }
         }
         
-        if ($tmp_consola == '') {
-            $error_consola =  " elegir la plataforma o consola es obligatorio";
-        }else {
-           $valores_validos_consola = ["PS4", "PS5", "PC","Nintendo_Switch","XBOX_Series_S/X"];
-           if (!in_array($tmp_consola,$valores_validos_consola)) {
-            $error_consola =  " la consola debe ser PS4, PS5, PC, Nintendo_Switch, XBOX_Series_S/X";
-           }else  $consola = $tmp_consola;
+        if($tmp_consola == '') {
+            $err_consola = "La consola es obligatoria";
+        } else {
+            $consolas_validas = ["ps4","ps5","switch","xboxsx"];
+            if(!in_array($tmp_consola,$consolas_validas)) {
+                $err_consola = "La consola no es válida";
+            } else {
+                $consola = $tmp_consola;
+            }
         }
-
         depurar( $tmp_fecha);
         if ($tmp_fecha == '') {
             $error_fecha = "La fecha de lanzamiento es obligatoria.";
         }else {
             //letras, espacios en blnco y tilde
-            $patron = "/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/";
+            $patron = "/^d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/";
             if(!preg_match($patron, $tmp_fecha)) {
                 $error_fecha = "Formato de fecha incorrecto";
 
-            }else { // preguntaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar
-                $tmp_fecha = strtotime($tmp_fecha);
-                $fecha_min = strtotime("1957-01-01");
-                $fecha_max = strtotime((new DateTime())->modify('+5 years')->format('Y-m-d'));
+            }else { 
+               // $tmp_fecha = strtotime($tmp_fecha);
+                //$fecha_min = strtotime("1957-01-01");
+                //$fecha_max = strtotime((new DateTime())->modify('+5 years')->format('Y-m-d'));
+                $fecha_min = '1947-01-01';
+                $fecha_max = date('Y-m-d',strtotime('+5 years'));
 
-                if ($tmp_fecha < $fecha_min) {
-                    $error_fecha = "la fecha debe ser posterior a 1957";
-                }elseif ($tmp_fecha > $fecha_max) {
-                    $error_fecha = "la fecha debe ser posterior a 1957";
+                if ($tmp_fecha < $fecha_min || $tmp_fecha > $fecha_max) {
+                    $error_fecha = "la fecha debe ser posterior a 1947";
                 }else {
-                    $fecha = date("Y-m-d", $tmp_fecha);
+                    $fecha =  $tmp_fecha;
                 }
             }
             
@@ -107,16 +108,28 @@
         <?php if(isset($error_titulo)) echo "<span class='error'>$error_titulo</span>" ?>
     
         <br><br>
-        <label>plataforma</label><br><br>
-        <select name="consola">
-            <option disabled selected hidden>--- Elige la plataforma ---</option>
-            <option value="PS4">PS4</option>
-            <option value="PS5">PS5</option>
-            <option value="Nintendo_Switch">Nintendo Switch</option>
-            <option value="XBOX_Series_S/X"> XBOX Series S/X</option>
-            <option value="PC">PC</option>
-        </select>
-        <?php if (isset($error_consola)) echo "<span class='error'> $error_consola</span>"; ?>
+        <div class="container">
+        <!--<h1>Formulario de videojuegos</h1>-->
+        <form class="col-4" action="" method="post">
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="consola" value="ps4">
+                    <label class="form-check-label">Playstation 4</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="consola" value="ps5">
+                    <label class="form-check-label">Playstation 5</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="consola" value="switch">
+                    <label class="form-check-label">Nintendo Switch</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="consola" value="xboxsx">
+                    <label class="form-check-label">XBox Series X/S</label>
+                </div>
+                <?php if(isset($err_consola)) echo "<span class='error'>$err_consola</span>" ?>
+            </div>
         <br><br>
         <label> fecha</label><br><br>
         <input type="text" name="fecha">
@@ -152,41 +165,45 @@
         //comparar y corregir
         
         ?>
-        <!-- ¡Claro! Aquí tienes una receta sencilla y deliciosa de habichuelas rojas guisadas:
+        <!--ALTERNATIVA ALEJANDRA 
+        
+         if($tmp_fecha_lanzamiento == '') {
+            $err_fecha_lanzamiento = "La fecha de lanzamiento es obligatoria";
+        } else {
+            $patron = "/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/";
+            if(!preg_match($patron, $tmp_fecha_lanzamiento)) {
+                $err_fecha_lanzamiento = "Formato de fecha incorrecto";
+            } else {
+                list($anno_lanzamiento,$mes_lanzamiento,$dia_lanzamiento) =
+                    explode('-',$tmp_fecha_lanzamiento);
+                if($anno_lanzamiento < 1947) {
+                    $err_fecha_lanzamiento = "El año no puede ser anterior a 1947";
+                } else {
+                    $anno_actual = date("Y");
+                    $mes_actual = date("m");
+                    $dia_actual = date("d");
 
-Ingredientes:
-1 libra de habichuelas rojas (pueden ser frescas o enlatadas)
-1 cebolla pequeña, finamente picada
-1 pimiento verde, finamente picado
-2 dientes de ajo, finamente picados
-1 taza de salsa de tomate
-1 cucharadita de orégano
-1 cucharadita de comino
-1 hoja de laurel
-2 cucharadas de aceite de oliva
-Sal y pimienta al gusto
-4 tazas de agua o caldo de pollo
-Instrucciones:
-Preparar las habichuelas: Si usas habichuelas secas, déjalas en remojo durante la noche. Luego, cocínalas en agua hasta que estén tiernas. Si usas habichuelas enlatadas, simplemente escúrrelas y enjuágalas.
-Sofrito: En una olla grande, calienta el aceite de oliva a fuego medio. Añade la cebolla, el pimiento y el ajo. Sofríe hasta que la cebolla esté transparente.
-Añadir condimentos: Agrega la salsa de tomate, el orégano, el comino y la hoja de laurel. Cocina por unos minutos hasta que los sabores se mezclen bien.
-Cocinar las habichuelas: Añade las habichuelas y el agua o caldo de pollo. Lleva a ebullición, luego reduce el fuego y deja cocinar a fuego lento durante unos 30 minutos, o hasta que las habichuelas estén bien cocidas y el líquido se haya reducido un poco.
-Ajustar sabor: Sazona con sal y pimienta al gusto. Si prefieres una consistencia más espesa, puedes machacar algunas habichuelas contra el lado de la olla y mezclarlas bien.
-Servir:
-Sirve las habichuelas rojas guisadas con arroz blanco o como acompañamiento de tu plato principal favorito. ¡Disfruta!-->
-    
+                    if($anno_lanzamiento - $anno_actual < 5) {
+                        $fecha_lanzamiento = $tmp_fecha_lanzamiento;
+                    } elseif($anno_lanzamiento - $anno_actual > 5) {
+                        $err_fecha_lanzamiento = "La fecha debe ser anterior a dentro de 5 años";
+                    } elseif($anno_lanzamiento - $anno_actual == 5) {
+                        if($mes_lanzamiento - $mes_actual < 0) {
+                            $fecha_lanzamiento = $tmp_fecha_lanzamiento;
+                        } elseif($mes_lanzamiento - $mes_actual > 0) {
+                            $err_fecha_lanzamiento = "La fecha debe ser anterior a dentro de 5 años";
+                        } elseif($mes_lanzamiento - $mes_actual == 0) {
+                            if($dia_lanzamiento - $dia_actual <= 0) {
+                                $fecha_lanzamiento = $tmp_fecha_lanzamiento;
+                            } elseif($dia_lanzamiento - $dia_actual > 0) {
+                                $err_fecha_lanzamiento = "La fecha debe ser anterior a dentro de 5 años";
+                            }
+                        }
+                    }
+                }
+            }
 
-
-<!--Malaga C.F
-Equipos de la liga
-- Nombre (letras con tilde, ñ, espacios en blanco y punto)
-- Inicial (3 letras)
-- Liga (select con las opciones. Liga EA Sports, Liga Hypermotion, Liga Primera RFEF)
-- Ciudad (letras con tilde, ñ, ç y espacios en blanco)
-- Tiene titulo liga (select con si o no)
-- Fecha de fundacion (entre hoy y el 18 de diciembre de 1889)
-- Numero de jugadores (entre 22 y 32)
--->
+        -->
 </div>
 </body>
 </html>
