@@ -164,17 +164,37 @@
                     $fecha_actual = date("Y-m-d");
                     list($anno_actual,$mes_actual,$dia_actual) = explode('-',$fecha_actual);
                     list($anno,$mes,$dia) = explode('-',$tmp_fecha_nacimiento);
-                    if($anno_actual - $anno < 18) {
+
+                   if($anno_actual - $anno < 18) {
                         $err_fecha_nacimiento = "No puedes ser menor de edad";
-                    } elseif($anno_actual - $anno == 0) {
+                    } elseif($anno_actual - $anno == 18) {
                         if($mes_actual - $mes < 0) {
-                            //  ES MENOR DE EDAD
+                            $err_fecha_nacimiento = "No puedes ser menor de edad";
                         } elseif($mes_actual - $mes == 0) {
-                            //  NO SABEMOS, TENEMOS QUE MIRAR EL DÍA
-                            
+                            if($dia_actual - $dia < 0) {
+                                $err_fecha_nacimiento = "No puedes ser menor de edad";
+                            } else {
+                                $fecha_nacimiento = $tmp_fecha_nacimiento;
+                            }
                         } elseif($mes_actual - $mes > 0) {
-                            //  ES MAYOR DE EDAD
+                            $fecha_nacimiento = $tmp_fecha_nacimiento;
                         } 
+                    } elseif($anno_actual - $anno > 121) {
+                        $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                    } elseif($anno_actual - $anno == 121) {
+                        if($mes_actual - $mes > 0) {
+                            $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                        } elseif($mes_actual - $mes == 0) {
+                            if($dia_actual - $dia >= 0) {
+                                $err_fecha_nacimiento = "No puedes tener más de 120 años";
+                            } else {
+                                $fecha_nacimiento = $tmp_fecha_nacimiento;
+                            }
+                        } elseif($mes_actual - $mes < 0) {
+                            $fecha_nacimiento = $tmp_fecha_nacimiento;
+                        } 
+                    } else {
+                        $fecha_nacimiento = $tmp_fecha_nacimiento;
                     }
                 }
             }

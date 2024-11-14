@@ -9,6 +9,12 @@
     ini_set ("display_errors", 1);
     require('../05_funciones/fun_depurar.php');
     ?>
+    <style>
+        .error{
+            color: red;
+            font-style: italic;
+        }
+    </style>
     <!--Malaga C.F
     Equipos de la liga
     - Nombre (letras con tilde, ñ, espacios en blanco y punto)
@@ -25,11 +31,11 @@
      if($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmp_nombre = $_POST["nombre"];
         $tmp_inicial = $_POST["inicial"];
-        /*$tmp_liga = isset($_POST["liga"]);
-        $tmp_ciudad = $_POST["ciudad"];
-        $tmp_titulo = isset($_POST["titulo"]);
+        $tmp_titulo = isset($_POST["titulo"]) ? $_POST["titulo"] : ''; 
+        $tmp_ciudad = $_POST["ciudad"]; 
+        $tmp_liga = isset($_POST["liga"]) ? $_POST["liga"] : '';
         $tmp_fechaFun = $_POST["fechaFun"];
-        $tmp_numJug = $_POST["numJug"];*/
+        /*$tmp_numJug = $_POST["numJug"];*/
 
 
         depurar( $tmp_nombre);
@@ -60,6 +66,55 @@
             }
             
         }
+        if ($tmp_titulo == '') {
+            $error_titulo = "es obligatorio rellenar este campo";
+        }else {
+            $opciones_validas = ["si","no"];
+            if (!in_array($tmp_titulo,$opciones_validas)) {
+                $error_titulo = "respuesta no valida";
+            }else {
+                $titulo = $tmp_titulo;
+            }
+        }
+
+        depurar( $tmp_ciudad);
+        if ( $tmp_ciudad == '') {
+           $error_ciudad = "la ciudad es obligatoria";
+        }else {
+            $patron = "/^[a-zA-Z çáéíóúÁÉÍÓÚÑñüÜ]+$/";
+            if (!preg_match($patron,$tmp_ciudad)) {
+                $error_ciudad = "la ciudad solo debe contener letras";
+            }else {
+                $ciudad = $tmp_ciudad;
+            }
+        }
+        if ($tmp_liga == '') {
+            $error_liga = "la liga es obligatoria";
+        }else {
+            $tipos_ligas = ["Liga EA Sports", "Liga Hypermotion", "Liga Primera RFEF"];
+            if (!in_array($tmp_liga,$tipos_ligas)) {
+                $error_liga = "opcion no valida";
+            }else {
+                $liga = $tmp_liga;
+            }
+        }
+        depurar($tmp_fechaFun);
+        if ($tmp_fechaFun == '') {
+           $error_fecha = "la fecha es obligatoria";
+        }else {
+            $patron = "/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/";
+            if (!preg_match($patron,$tmp_fechaFun)) {
+               $error_fecha = "el formato de fecha es incorrecto";
+            }else {
+              $fecha_min = "1880-12-18";
+              $fecha_max = date('Y-m-d');
+              if ($tmp_fechaFun<$fecha_min || $tmp_fechaFun >$fecha_max) {
+                $error_fecha = " la fecha se sale de los intervalos permitidos";
+              }else {
+                $fechaFun = $tmp_fechaFun;
+              }
+            }
+        }
     }
     ?>
     <form action="" method="POST">
@@ -72,7 +127,47 @@
         <input type="text" name="inicial">
         <?php if(isset($error_inicial)) echo "<span class='error'>$error_inicial</span>" ?>
         <br><br>
+        <div>
+            <label>titulo</label> <br><br>
+            <input type="radio" name="titulo" value="si">
+            <label >si</label>
+            <br><br>
+            <input type="radio" name="titulo" value="no">
+            <label >no</label>
+        </div>
+        <br>
+        <?php if(isset($error_titulo)) echo "<span class='error'>$error_titulo</span>" ?>
+        <br>
+        <label>ciudad</label> <br>
+        <input type="text" name="ciudad">
+        <?php if(isset($error_ciudad)) echo "<span class='error'>$error_ciudad</span>" ?>
+        <br><br>
+        <label>liga</label> <br><br>
+        <select name ="liga">
+            <option disabled selected hidden>--- Especifica la liga ---</option>
+            <option value="Liga EA Sports">Liga EA Sports</option>
+            <option value="Liga Hypermotion">Liga Hypermotion</option>
+            <option value="Liga Primera RFEF"> Liga Primera RFEF</option>
+        </select>
+        <br><br>
+        <?php if(isset($error_liga)) echo "<span class='error'>$error_liga</span>" ?>
+        <br>
+        <label>fecha fundacion</label> <br>
+        <input type="text" name="fechaFun">
+        <?php if(isset($error_fecha)) echo "<span class='error'>$error_fecha</span>" ?>
+        <br><br>
         <input type="submit" value="enviar">
+
+        <?php
+        if(isset($nombre) && isset($inicial) && isset($titulo) && isset($ciudad) && isset($liga) && isset($fechaFun)) { ?>
+            <h3><?php echo $nombre ?></h3>
+            <h3><?php echo $inicial ?></h3>
+            <h3><?php echo $titulo ?></h3>
+            <h3><?php echo $ciudad ?></h3>
+            <h3><?php echo $liga ?></h3>
+            <h3><?php echo $fechaFun ?></h3>
+
+        <?php } ?>
 
     </form>
 </body>

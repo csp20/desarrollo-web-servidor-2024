@@ -32,9 +32,9 @@
     <?php
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmp_titulo = $_POST["titulo"];
-        $tmp_consola = isset($_POST["consola"]);//preguntaaaaaaaar
+        $tmp_consola = isset($_POST["consola"]) ? $_POST["consola"]: '';
         $tmp_fecha = $_POST["fecha"];
-        $tmp_pegi = isset($_POST["pegi"]);
+        $tmp_pegi = isset($_POST["pegi"]) ? $_POST["pegi"]: '';
 
         depurar( $tmp_titulo);
         if ($tmp_titulo == '') {
@@ -69,7 +69,7 @@
             $error_fecha = "La fecha de lanzamiento es obligatoria.";
         }else {
             //letras, espacios en blnco y tilde
-            $patron = "/^d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/";
+            $patron = "/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/";
             if(!preg_match($patron, $tmp_fecha)) {
                 $error_fecha = "Formato de fecha incorrecto";
 
