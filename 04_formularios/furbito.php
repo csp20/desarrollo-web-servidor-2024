@@ -35,9 +35,8 @@
         $tmp_ciudad = $_POST["ciudad"]; 
         $tmp_liga = isset($_POST["liga"]) ? $_POST["liga"] : '';
         $tmp_fechaFun = $_POST["fechaFun"];
-        /*$tmp_numJug = $_POST["numJug"];*/
-
-
+        $tmp_numJug = $_POST["numJug"];
+        /* */
         depurar( $tmp_nombre);
         if ($tmp_nombre == '') {
             $error_nombre = "el nombre es obligatorio";
@@ -115,6 +114,26 @@
               }
             }
         }
+        depurar($tmp_numJug);
+        if ($tmp_numJug == '') {
+            $error_numJug = "este campo es obligatorio, rellenalo";
+        }else {
+            if (strlen($tmp_numJug)!=2) {
+                $error_numJug = "deben ser 2 cifras ";
+            }else {
+                $patron = "/^[0-9]{2}$/";
+                if (!preg_match($patron,$tmp_numJug)) {
+                   $error_numJug = " deben ser numeros";
+                }else {
+                    if ($tmp_numJug < 22 || $tmp_numJug >32) {
+                       $error_numJug = "deben ser entre 22 y 32 jugadores";
+                    }else {
+                        $numjug = $tmp_numJug;
+                    }
+                    
+                }
+            }
+        }
     }
     ?>
     <form action="" method="POST">
@@ -153,8 +172,12 @@
         <?php if(isset($error_liga)) echo "<span class='error'>$error_liga</span>" ?>
         <br>
         <label>fecha fundacion</label> <br>
-        <input type="text" name="fechaFun">
+        <input type="date" name="fechaFun">
         <?php if(isset($error_fecha)) echo "<span class='error'>$error_fecha</span>" ?>
+        <br><br>
+        <label>num de jugadores</label> <br>
+        <input type="text" name="numJug">
+        <?php if(isset($error_numJug)) echo "<span class='error'>$error_numJug</span>" ?>
         <br><br>
         <input type="submit" value="enviar">
 
