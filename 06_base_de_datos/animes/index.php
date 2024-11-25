@@ -10,10 +10,18 @@
     ini_set ("display_errors", 1);
 
     require('conexion.php');
+    session_start();
+    if (isset($_SESSION["usuario"])) {
+        echo "<h2>Bienvenid@ " . $_SESSION["usuario"]. "</h2>";
+     }else{
+        header("location: usuario/iniciar_sesion.php");
+        exit;
+     }
     ?>
 </head>
 <body>
     <div class ="container">
+        <a class="btn btn-warning" href="usuario/cerrar_sesion.php"> cerrar sesion</a>
     <h1>tabla de animes</h1>
     <?php
         $sql = "SELECT * FROM animes";
