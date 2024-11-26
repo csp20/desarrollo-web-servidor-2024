@@ -1,8 +1,8 @@
 <?php
     $_servidor = "127.0.0.1"; // O "localhost"
-    $_usuario = "csp0017";
-    $_contrasena = "Guacamayo32000";
-    $_base_de_datos = "tienda_bd";
+    $_usuario = "estudiante";
+    $_contrasena = "estudiante";
+    $_base_de_datos = "animes_bd";
 
     // Crear conexión
     $_conexion = new mysqli($_servidor, $_usuario, $_contrasena, $_base_de_datos);
