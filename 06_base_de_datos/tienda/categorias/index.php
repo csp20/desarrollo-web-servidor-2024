@@ -54,7 +54,7 @@
                     echo "<td>" . $fila["categoria"] . "</td>";
                     echo "<td>" . $fila["descripcion"] . "</td>";
                     echo "<td></td>";
-                    echo '<td><a class="btn btn-secondary" href="editar_categoria.php">editar categoria</a></td>';
+                    echo '<td><a class="btn btn-secondary" href="editar_categoria.php?categoria=' .$fila["categoria"] . '">editar categoria</a></td>';
                     echo '<td>
                             <form action="" method="post">
                                 <input type="hidden" name="fila" value="' . $fila["categoria"] . '">
