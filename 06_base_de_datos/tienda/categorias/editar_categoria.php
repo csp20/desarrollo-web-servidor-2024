@@ -17,8 +17,7 @@
     <div class="container">
         <h1>Editar categoría</h1>
         <?php
-        $descripcion = "";
-        //if (isset($_GET["categoria"])) {
+            $descripcion = "";
             $categoria = $_GET["categoria"];
             $sql = "SELECT * FROM categorias WHERE categoria = '$categoria'";
             $resultado = $_conexion->query($sql);
@@ -26,10 +25,6 @@
             while ($fila = $resultado->fetch_assoc()) {
                 $descripcion = $fila["descripcion"];
             }
-        /*} else {
-            echo "Categoria no especificada";
-            exit;
-        }*/
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $categoria = $_POST["categoria"];

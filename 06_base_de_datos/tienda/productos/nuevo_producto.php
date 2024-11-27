@@ -41,7 +41,7 @@
     }
 
     ?>
-    <h2> crear categoria</h2>
+    <h2> crear producto</h2>
     <form class="col-6" action="" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">id_producto</label>
@@ -80,8 +80,6 @@
         <br>
         <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="crear nuevo producto">
-                <br> <br>
-               
                 <a class="btn btn-secondary" href="index.php">Volver</a>
             </div>
            <!-- <div class="mb-3">
