@@ -10,6 +10,7 @@
         ini_set("display_errors", 1);
 
         require('../utiles/conexion.php');
+        // https://getbootstrap.com/docs/5.3/components/navs-tabs/
     ?>
 </head>
 <body>
@@ -17,7 +18,7 @@
         <h1>Editar categoría</h1>
         <?php
         $descripcion = "";
-        if (isset($_GET["categoria"])) {
+        //if (isset($_GET["categoria"])) {
             $categoria = $_GET["categoria"];
             $sql = "SELECT * FROM categorias WHERE categoria = '$categoria'";
             $resultado = $_conexion->query($sql);
@@ -25,10 +26,10 @@
             while ($fila = $resultado->fetch_assoc()) {
                 $descripcion = $fila["descripcion"];
             }
-        } else {
-            echo "Categoría no especificada.";
+        /*} else {
+            echo "Categoria no especificada";
             exit;
-        }
+        }*/
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $categoria = $_POST["categoria"];

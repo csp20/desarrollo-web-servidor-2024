@@ -1,7 +1,7 @@
 <?php
     $_servidor = "127.0.0.1"; // O "localhost"
-    $_usuario = "csp0017";
-    $_contrasena = "Guacamayo32000";
+    $_usuario = "estudiante";
+    $_contrasena = "estudiante";
     $_base_de_datos = "tienda_bd";
 
     // Crear conexión
