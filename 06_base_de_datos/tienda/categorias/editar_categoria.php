@@ -10,8 +10,13 @@
         ini_set("display_errors", 1);
 
         require('../utiles/conexion.php');
-        // https://getbootstrap.com/docs/5.3/components/navs-tabs/
     ?>
+    <style>
+        .error{
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -27,22 +32,36 @@
             }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $categoria = $_POST["categoria"];
-            $descripcion = $_POST["descripcion"];
+            $tmp_categoria = $_POST["categoria"];
+            $tmp_descripcion = $_POST["descripcion"];
 
-            $sql = "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = '$categoria'";
-            $_conexion->query($sql);
-            
+            if ($tmp_descripcion == '') {
+                $error_descripcion = "La descripción es obligatoria.";
+            } else {
+                if (strlen($tmp_descripcion) > 255) {
+                    $error_descripcion = "La descripción no puede tener más de 255 caracteres.";
+                } else {
+                    $descripcion = $tmp_descripcion;
+                }
+            }
+
+            if (!isset($error_descripcion)) {
+                $sql = "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = '$categoria'";
+                $_conexion->query($sql);
+                    
+            }
         }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
                 <input class="form-control" type="text" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>" readonly>
+                <?php if(isset($error_categoria)) echo "<span class='error'>$error_categoria</span>" ?>
             </div>
             <div class="mb-3">
                 <label class="form-label">Descripción</label>
                 <input class="form-control" type="text" name="descripcion" value="<?php echo htmlspecialchars($descripcion); ?>">
+                <?php if(isset($error_descripcion)) echo "<span class='error'>$error_descripcion</span>" ?>
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Confirmar">
@@ -50,7 +69,8 @@
             </div>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
 </body>
 </html>
+
 

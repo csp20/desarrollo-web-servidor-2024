@@ -3,95 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nuevo producto</title>
+    <title>Nuevo producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php
-        error_reporting( E_ALL );
-        ini_set("display_errors", 1 );    
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 
         require('../utiles/conexion.php');
     ?>
+    <style>
+        .error{
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <?php
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_producto = $_POST["id_producto"];
-    $nombre = $_POST["nombre"];
-    $precio = $_POST["precio"];
-    $categoria = $_POST["categoria"];
-    $stock = $_POST["stock"];
-    $imagen = $_POST["imagen"];
-    $descripcion = $_POST["descripcion"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $tmp_id_producto = $_POST["id_producto"];
+        $tmp_nombre = $_POST["nombre"];
+        $tmp_precio = $_POST["precio"];
+        $tmp_categoria = $_POST["categoria"];
+        $tmp_stock = $_POST["stock"];
+        $tmp_imagen = $_POST["imagen"];
+        $tmp_descripcion = $_POST["descripcion"];
 
+        if ($tmp_nombre == '') {
+            $error_nombre = "El nombre es obligatorio.";
+        } else {
+            $patron = "/^[a-zA-Z0-9 çáéíóúÁÉÍÓÚÑñüÜ]+$/";
+            if (!preg_match($patron, $tmp_nombre)) {
+                $error_nombre = "El nombre solo puede contener letras, números y espacios en blanco.";
+            } else {
+                if (strlen($tmp_nombre) < 2) {
+                    $error_nombre = "El nombre debe tener al menos 2 caracteres.";
+                } else {
+                    $nombre = $tmp_nombre;                 
+                }
+            }
+        }
 
-    $sql = "INSERT INTO producto (id_producto, nombre, precio, categoria, stock, imagen, descripcion ) 
-    VALUES ('$id_producto','$nombre', '$precio','$categoria', '$stock','$imagen', '$descripcion')";
+        if ($tmp_precio == '') {
+            $error_precio = "El precio es obligatorio.";
+        } else {
+            $patron_precio = "/^\d{1,4}(\.\d{1,2})?$/";
+            if (!preg_match($patron_precio, $tmp_precio)) {
+                $error_precio = "El precio debe ser un número con 4 dígitos enteros máximo y 2 decimales.";
+            } else {
+                if ($tmp_precio < 0) {
+                    $error_precio = "El precio debe ser un número positivo.";
+                } else {
+                    $precio = $tmp_precio;
+                }
+            }
+        }
 
-    $_conexion -> query($sql);
+        if ($tmp_categoria == '') {
+            $error_categoria = "La categoría es obligatoria.";
+        } else {
+            $categoria = $tmp_categoria;
+        }
 
-   
+        if ($tmp_stock == '') {
+            $error_stock = "El stock es obligatorio.";
+        } else {
+            $patron_stock = "/^[0-9]+$/";
+            if (!preg_match($patron_stock, $tmp_stock)) {
+                $error_stock = "El stock debe ser un número.";
+            } else {
+                if ($tmp_stock < 0) {
+                    $error_stock = "El stock debe ser un número positivo.";
+                } else {
+                    $stock = $tmp_stock;
+                }
+            }
+        }
 
+        /*if ($tmp_imagen == '') {
+            $error_imagen = "La imagen es obligatoria.";
+        } else {
+            $imagen = $tmp_imagen;
+        }*/
+
+        if ($tmp_descripcion == '') {
+            $error_descripcion = "La descripción es obligatoria.";
+        } else {
+            if (strlen($tmp_descripcion) > 255) {
+                $error_descripcion = "La descripción no puede tener más de 255 caracteres.";
+            } else {
+                $descripcion = $tmp_descripcion;
+            }
+        }
+
+        if (!isset($error_nombre) && !isset($error_precio) && !isset($error_categoria) && !isset($error_stock) && !isset($error_imagen) && !isset($error_descripcion)) {
+            $sql = "INSERT INTO producto (id_producto, nombre, precio, categoria, stock, imagen, descripcion) 
+                    VALUES ('$tmp_id_producto', '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
+            $_conexion->query($sql);
+        }
     }
-    $sql = "SELECT * FROM producto ORDER BY id_producto";
-    $resultado = $_conexion -> query($sql);
-    $productos = [];
-
-    while($fila = $resultado -> fetch_assoc()) {
-        array_push($productos, $fila["id_producto"]);
-    }
-
     ?>
-    <h2> crear producto</h2>
+    <h2>Crear producto</h2>
     <form class="col-6" action="" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label class="form-label">id_producto</label>
+            <label class="form-label">ID Producto</label>
             <input class="form-control" type="text" name="id_producto">
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">nombre</label>
+            <label class="form-label">Nombre</label>
             <input class="form-control" type="text" name="nombre">
+            <?php if(isset($error_nombre)) echo "<span class='error'>$error_nombre</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">precio</label>
+            <label class="form-label">Precio</label>
             <input class="form-control" type="text" name="precio">
+            <?php if(isset($error_precio)) echo "<span class='error'>$error_precio</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">categoria</label>
+            <label class="form-label">Categoría</label>
             <input class="form-control" type="text" name="categoria">
+            <?php if(isset($error_categoria)) echo "<span class='error'>$error_categoria</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">stock</label>
+            <label class="form-label">Stock</label>
             <input class="form-control" type="text" name="stock">
+            <?php if(isset($error_stock)) echo "<span class='error'>$error_stock</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">imagen</label>
+            <label class="form-label">Imagen</label>
             <input class="form-control" type="text" name="imagen">
+            <?php if(isset($error_imagen)) echo "<span class='error'>$error_imagen</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">descripcion</label>
+            <label class="form-label">Descripción</label>
             <input class="form-control" type="text" name="descripcion">
+            <?php if(isset($error_descripcion)) echo "<span class='error'>$error_descripcion</span>" ?>
         </div>
         <br>
         <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="crear nuevo producto">
-                <a class="btn btn-secondary" href="index.php">Volver</a>
-            </div>
-           <!-- <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="iniciar sesion">
-                <a class="btn btn-secondary" href="../index.php">Volver</a>
-            </div>-->
-        </form>
-        <!--<div>
-            <h3> si no tienes cuenta  create una </h3>
-        <a class="btn btn-secondary" href="registro.php"> registrate</a>
-        </div>-->
+            <input class="btn btn-primary" type="submit" value="Crear nuevo producto">
+            <a class="btn btn-secondary" href="index.php">Volver</a>
+        </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
 </body>
 </html>

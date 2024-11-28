@@ -19,7 +19,7 @@
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $_POST["usuario"];
             $contrasena = $_POST["contrasena"];
-
+            //CREAR TABLAAAAAAAA USUARIOSSSS
            $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
            $resultado = $_conexion -> query($sql);
            var_dump($resultado);
