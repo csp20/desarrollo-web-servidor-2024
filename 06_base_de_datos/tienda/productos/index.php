@@ -10,13 +10,8 @@
     ini_set("display_errors", 1);
 
     require('../utiles/conexion.php');
-    /*session_start();
-    if (isset($_SESSION["usuario"])) {
-        echo "<h2>Bienvenid@ " . $_SESSION["usuario"]. "</h2>";
-     }else{
-        header("location: usuario/iniciar_sesion.php");
-        exit;
-     }*/
+    session_start();
+    
     ?>
 </head>
 <body>
@@ -24,8 +19,12 @@
         <!--<a class="btn btn-warning" href="usuario/cerrar_sesion.php">cerrar sesion</a>-->
         
         <h1>tabla de productos</h1>
-        <a class="btn btn-secondary" href="nuevo_producto.php">crear producto</a>
-        <br><br>
+        <a class="btn btn-primary" href="nuevo_producto.php">crear producto</a>
+        <div class="mb-3">
+            <br>
+                <a class="btn btn-secondary" href="../index.php">Volver</a>
+            </div>
+        <br>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["fila"])) {
             $fila = $_POST["fila"];

@@ -8,7 +8,7 @@
     <?php
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
-
+        session_start();
         require('../utiles/conexion.php');
     ?>
     <style>
@@ -26,7 +26,7 @@
         $tmp_precio = $_POST["precio"];
         $tmp_categoria = $_POST["categoria"];
         $tmp_stock = $_POST["stock"];
-        $tmp_imagen = $_POST["imagen"];
+        $imagen = $_POST["imagen"];
         $tmp_descripcion = $_POST["descripcion"];
 
         if ($tmp_nombre == '') {
@@ -81,10 +81,22 @@
         }
 
         /*if ($tmp_imagen == '') {
-            $error_imagen = "La imagen es obligatoria.";
-        } else {
-            $imagen = $tmp_imagen;
-        }*/
+            $err_imagen = "Debes ingresar una imagen"; 
+       } else { 
+           $tmp_imagen = $_FILES["imagen"]["name"]; 
+           $ubicacion_temporal = $_FILES["imagen"]["tmp_name"]; 
+           $ubicacion_final = "./imagen/$tmp_imagen"; 
+           //compruebo el tipo de archivo 
+           $tipo_imagen = mime_content_type($ubicacion_temporal); 
+           $tipos_permitidos = ["image/jpeg", "image/png"]; 
+           if (!in_array($tipo_imagen, $tipos_permitidos)) {
+               $err_imagen = "El archivo debe ser una imagen (JPG o PNG )"; 
+           } elseif ($_FILES["imagen"]["size"] > 5000000) { //5MB de limite 
+               $err_imagen = "El archivo no debe superar los 5MB";
+           }elseif (!move_uploaded_file($ubicacion_temporal, $ubicacion_final)) {
+               $err_imagen = "Error al subir la imagen"; 
+           } 
+       }*/
 
         if ($tmp_descripcion == '') {
             $error_descripcion = "La descripción es obligatoria.";
@@ -136,9 +148,14 @@
         <br>
         <div class="mb-3">
             <label class="form-label">Imagen</label>
-            <input class="form-control" type="text" name="imagen">
+            <select class="form-control" name="imagen">
+                <option value="producto1.jpg" selected>producto1.jpg</option>
+                <option value="producto2.jpg">producto2.jpg</option>
+                <option value="producto3.png">producto3.png</option>
+            </select>
             <?php if(isset($error_imagen)) echo "<span class='error'>$error_imagen</span>" ?>
         </div>
+
         <br>
         <div class="mb-3">
             <label class="form-label">Descripción</label>

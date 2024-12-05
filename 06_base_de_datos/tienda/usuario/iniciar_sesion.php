@@ -19,10 +19,10 @@
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $_POST["usuario"];
             $contrasena = $_POST["contrasena"];
-            //CREAR TABLAAAAAAAA USUARIOSSSS
+            
            $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
            $resultado = $_conexion -> query($sql);
-           var_dump($resultado);
+           //var_dump($resultado);
            if ($resultado -> num_rows == 0) {
                 echo "<h2>el usuario $usuario no existe</h2>";
            }else{
@@ -44,7 +44,6 @@
             }
            }
         }
-        //print_r($estudios);
  
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
