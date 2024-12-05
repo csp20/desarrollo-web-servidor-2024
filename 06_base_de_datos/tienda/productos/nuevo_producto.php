@@ -26,8 +26,14 @@
         $tmp_precio = $_POST["precio"];
         $tmp_categoria = $_POST["categoria"];
         $tmp_stock = $_POST["stock"];
-        $imagen = $_POST["imagen"];
+        $imagen =isset($_POST["imagen"]);
         $tmp_descripcion = $_POST["descripcion"];
+
+
+        $imagen = $_FILES["imagen"]["name"];
+                    $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
+                    $ubicacion_final = "../imagenes/$imagen";
+                    move_uploaded_file($ubicacion_temporal, $ubicacion_final);
 
         if ($tmp_nombre == '') {
             $error_nombre = "El nombre es obligatorio.";
@@ -147,15 +153,9 @@
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">Imagen</label>
-            <select class="form-control" name="imagen">
-                <option value="producto1.jpg" selected>producto1.jpg</option>
-                <option value="producto2.jpg">producto2.jpg</option>
-                <option value="producto3.png">producto3.png</option>
-            </select>
-            <?php if(isset($error_imagen)) echo "<span class='error'>$error_imagen</span>" ?>
+            <label class="form-label" for="imagen">imagen</label>
+            <input class="form-control" type="file" name="imagen">
         </div>
-
         <br>
         <div class="mb-3">
             <label class="form-label">Descripción</label>

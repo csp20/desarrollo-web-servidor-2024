@@ -59,7 +59,11 @@
                     echo "<td>" . $fila["precio"] . "</td>";
                     echo "<td>" . $fila["categoria"] . "</td>";
                     echo "<td>" . $fila["stock"] . "</td>";
-                    echo "<td>" . $fila["imagen"] . "</td>";
+                    ?>
+                    <td>
+                        <img width='90' height='100' src="../imagenes/<?php echo $fila["imagen"]; ?>" >
+                    </td>
+                    <?php
                     echo "<td>" . $fila["descripcion"] . "</td>";
                     echo "<td></td>";
                     echo '<td><a class="btn btn-secondary" href="editar_producto.php?id_producto=' . $fila["id_producto"] . '">editar producto</a></td>';
