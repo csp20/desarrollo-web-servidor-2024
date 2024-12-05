@@ -22,7 +22,7 @@
     <div class="container">
         <h1>Editar producto</h1>
         <?php
-        //if (isset($_GET["id_producto"])) {
+       
             $id_producto = $_GET["id_producto"];
             $sql = "SELECT * FROM producto WHERE id_producto = '$id_producto'";
             $resultado = $_conexion->query($sql);
@@ -35,10 +35,6 @@
                     $imagen = $fila["imagen"];
                     $descripcion = $fila["descripcion"];
                 }
-        /*} else {
-            echo "ID de producto no especificado.";
-            exit;
-        }*/
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $tmp_nombre = $_POST["nombre"];
@@ -68,7 +64,7 @@
             if ($tmp_precio == '') {
                 $error_precio = "El precio es obligatorio.";
             } else {
-                $patron_precio = "/^\d{1,4}(\.\d{1,2})?$/";
+                $patron_precio = "/^[0-9]{1,4}(\.[0-9]{1,2})?$/";
                 if (!preg_match($patron_precio, $tmp_precio)) {
                     $error_precio = "El precio debe ser un número con hasta 4 dígitos enteros y 2 decimales.";
                 } else {

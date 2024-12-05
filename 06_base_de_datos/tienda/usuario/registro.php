@@ -8,7 +8,7 @@
     <?php
         error_reporting( E_ALL );
         ini_set("display_errors", 1 );    
-        require('../conexion.php');
+        require('../utiles/conexion.php');
     ?>
 </head>
 <body>

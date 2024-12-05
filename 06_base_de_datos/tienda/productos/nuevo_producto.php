@@ -47,7 +47,7 @@
         if ($tmp_precio == '') {
             $error_precio = "El precio es obligatorio.";
         } else {
-            $patron_precio = "/^\d{1,4}(\.\d{1,2})?$/";
+            $patron_precio = "/^[0-9]{1,4}(\.[0-9]{1,2})?$/";
             if (!preg_match($patron_precio, $tmp_precio)) {
                 $error_precio = "El precio debe ser un número con 4 dígitos enteros máximo y 2 decimales.";
             } else {
