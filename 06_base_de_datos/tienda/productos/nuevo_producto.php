@@ -31,9 +31,9 @@
 
 
         $imagen = $_FILES["imagen"]["name"];
-                    $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
-                    $ubicacion_final = "../imagenes/$imagen";
-                    move_uploaded_file($ubicacion_temporal, $ubicacion_final);
+            $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
+            $ubicacion_final = "../imagenes/$imagen";
+            move_uploaded_file($ubicacion_temporal, $ubicacion_final);
 
         if ($tmp_nombre == '') {
             $error_nombre = "El nombre es obligatorio.";

@@ -11,6 +11,12 @@
         require('../utiles/conexion.php');
         
     ?>
+    <style>
+        .error{
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -22,25 +28,21 @@
             
            $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
            $resultado = $_conexion -> query($sql);
-           //var_dump($resultado);
+           
            if ($resultado -> num_rows == 0) {
-                echo "<h2>el usuario $usuario no existe</h2>";
+                //echo "<h2>el usuario $usuario no existe</h2>";
+                $error_inicio_usu = "<h2>el usuario $usuario no existe</h2>";
            }else{
             $datos_usuario = $resultado -> fetch_assoc();
-            /**
-             * podemos acceder a :
-             * $datos_usuario["usuario"]
-             * $datos_usuario["contrasena"]
-             */
             $acceso_concedido = password_verify($contrasena, $datos_usuario["contrasena"]);
-            //var_dump($acceso_concedido);
             if ($acceso_concedido) {
                session_start();
-               $_SESSION["usuario"] = "usuario";
+               $_SESSION["usuario"] = $usuario;
                header("location: ../index.php");
                exit;
             }else{
-                echo "<h2> la contraseña es incorrecta </h2>";
+                //echo "<h2> la contraseña es incorrecta </h2>";
+                $error_inicio_con = "<h2> la contraseña es incorrecta </h2>";
             }
            }
         }
@@ -50,10 +52,12 @@
             <div class="mb-3">
                 <label class="form-label">usuario</label>
                 <input class="form-control" type="text" name="usuario">
+                <?php if(isset($error_inicio_usu)) echo "<span class='error'>$error_inicio_usu</span>" ?>
             </div>
             <div class="mb-3">
                 <label class="form-label">contraseña</label>
                 <input class="form-control" type="password" name="contrasena">
+                <?php if(isset($error_inicio_con)) echo "<span class='error'>$error_inicio_con</span>" ?>
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="iniciar sesion">
