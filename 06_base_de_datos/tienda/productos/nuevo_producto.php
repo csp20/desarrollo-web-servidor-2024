@@ -21,7 +21,7 @@
 <body>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $tmp_id_producto = $_POST["id_producto"];
+        
         $tmp_nombre = $_POST["nombre"];
         $tmp_precio = $_POST["precio"];
         $tmp_categoria = $_POST["categoria"];
@@ -34,6 +34,7 @@
             $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
             $ubicacion_final = "../imagenes/$imagen";
             move_uploaded_file($ubicacion_temporal, $ubicacion_final);
+
 
         if ($tmp_nombre == '') {
             $error_nombre = "El nombre es obligatorio.";
@@ -86,24 +87,6 @@
             }
         }
 
-        /*if ($tmp_imagen == '') {
-            $err_imagen = "Debes ingresar una imagen"; 
-       } else { 
-           $tmp_imagen = $_FILES["imagen"]["name"]; 
-           $ubicacion_temporal = $_FILES["imagen"]["tmp_name"]; 
-           $ubicacion_final = "./imagen/$tmp_imagen"; 
-           //compruebo el tipo de archivo 
-           $tipo_imagen = mime_content_type($ubicacion_temporal); 
-           $tipos_permitidos = ["image/jpeg", "image/png"]; 
-           if (!in_array($tipo_imagen, $tipos_permitidos)) {
-               $err_imagen = "El archivo debe ser una imagen (JPG o PNG )"; 
-           } elseif ($_FILES["imagen"]["size"] > 5000000) { //5MB de limite 
-               $err_imagen = "El archivo no debe superar los 5MB";
-           }elseif (!move_uploaded_file($ubicacion_temporal, $ubicacion_final)) {
-               $err_imagen = "Error al subir la imagen"; 
-           } 
-       }*/
-
         if ($tmp_descripcion == '') {
             $error_descripcion = "La descripción es obligatoria.";
         } else {
@@ -115,18 +98,15 @@
         }
 
         if (!isset($error_nombre) && !isset($error_precio) && !isset($error_categoria) && !isset($error_stock) && !isset($error_imagen) && !isset($error_descripcion)) {
-            $sql = "INSERT INTO producto (id_producto, nombre, precio, categoria, stock, imagen, descripcion) 
-                    VALUES ('$tmp_id_producto', '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
+            $sql = "INSERT INTO producto ( nombre, precio, categoria, stock, imagen, descripcion) 
+                    VALUES ( '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
             $_conexion->query($sql);
         }
     }
     ?>
     <h2>Crear producto</h2>
     <form class="col-6" action="" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label class="form-label">ID Producto</label>
-            <input class="form-control" type="text" name="id_producto">
-        </div>
+        
         <br>
         <div class="mb-3">
             <label class="form-label">Nombre</label>

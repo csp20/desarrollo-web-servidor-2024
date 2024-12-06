@@ -17,3 +17,7 @@ CREATE TABLE producto (
     descripcion VARCHAR(255),
     FOREIGN KEY (categoria) REFERENCES categorias(categoria)
 );
+CREATE TABLE usuarios (
+        usuario VARCHAR(50) NOT NULL,
+        contraseña VARCHAR(50) NOT NULL
+    );

@@ -30,7 +30,6 @@
            $resultado = $_conexion -> query($sql);
            
            if ($resultado -> num_rows == 0) {
-                //echo "<h2>el usuario $usuario no existe</h2>";
                 $error_inicio_usu = "<h2>el usuario $usuario no existe</h2>";
            }else{
             $datos_usuario = $resultado -> fetch_assoc();
@@ -41,7 +40,6 @@
                header("location: ../index.php");
                exit;
             }else{
-                //echo "<h2> la contraseña es incorrecta </h2>";
                 $error_inicio_con = "<h2> la contraseña es incorrecta </h2>";
             }
            }

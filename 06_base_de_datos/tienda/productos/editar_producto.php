@@ -62,10 +62,7 @@
             }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label class="form-label">ID Producto</label>
-                <input class="form-control" type="text" name="id_producto" value="<?php echo htmlspecialchars($id_producto); ?>" readonly>
-            </div>
+        
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
                 <input class="form-control" type="text" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>">
