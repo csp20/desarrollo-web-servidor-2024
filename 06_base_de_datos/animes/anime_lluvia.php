@@ -36,15 +36,37 @@
             $ubicacion_final = "./imagenes/$nombre_imagen";
 
             move_uploaded_file($ubicacion_temporal, $ubicacion_final);
-
+            /*
             $sql = "INSERT INTO animes (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen) 
                 VALUES ('$titulo', '$nombre_estudio', $anno_estreno, $num_temporadas, '$ubicacion_final')";
 
             $_conexion -> query($sql);
+            
+            3 etapasw de prepared statmente
+            1 prep
+            2 enlaza
+            3 ejecuion
+            
+            */
+            //1
+            $sql = $_conexion -> prepare("INSERT INTO animes 
+            (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
+            VALUES (?,?,?,?,?)");
+
+            //2
+            $sql -> bind_param("ssiis", 
+            $titulo,$nombre_estudio,$anno_estreno,$num_temporadas,$ubicacion_final);
+
+            //3
+            $sql ->execute();
+
+            
         }
 
         $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
         $resultado = $_conexion -> query($sql);
+        //close
+        $_conexion -> close();
         $estudios = [];
 
         while($fila = $resultado -> fetch_assoc()) {

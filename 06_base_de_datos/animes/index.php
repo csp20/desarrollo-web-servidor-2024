@@ -24,6 +24,24 @@
         <a class="btn btn-warning" href="usuario/cerrar_sesion.php"> cerrar sesion</a>
     <h1>tabla de animes</h1>
     <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+           $id_anime = $_POST["id_anime"];
+           echo "<h1>$id_anime</h1>",
+           //borrar anime
+           /*$sql = "DELETE FROM animes WHERE id_anime = $id_anime";
+           $_conexion -> query($sql);*/
+        
+        //1 prepare
+        $sql = "DELETE FROM animes WHERE id_anime = ?";
+
+        //2 bind
+        $sql -> bind_param("i",$id_anime);
+
+        //3 execute
+        $sql -> execute();
+        }
+
+        
         $sql = "SELECT * FROM animes";
         $resultado = $_conexion -> query($sql);
         /**

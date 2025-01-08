@@ -16,7 +16,7 @@
     <div class="container">
         <h1>Editar anime</h1>
         <?php
-        //echo "<h1>" . $_GET["id_anime"] . "</h1>";
+        
 
         $id_anime = $_GET["id_anime"];
         $sql = "SELECT * FROM animes WHERE id_anime = $id_anime";
@@ -31,9 +31,19 @@
         }
 
         //echo "<h1>$titulo</h1>";
-
+        /*
         $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
-        $resultado = $_conexion -> query($sql);
+        $resultado = $_conexion -> query($sql);*/
+
+        //1 prepare
+        $sql = $_conexion -> prepare ("SELECT * FROM estudios ORDER BY ?");
+        //2 bind
+        $sql -> bind_param("s", $nombre_estudio);
+        //3 execute
+        $sql -> execute ();
+        //4 retrieve
+        $resultado = $sql -> get_result();
+
         $estudios = [];
 
         while($fila = $resultado -> fetch_assoc()) {
@@ -47,7 +57,8 @@
             $anno_estreno = $_POST["anno_estreno"];
             $num_temporadas = $_POST["num_temporadas"];
 
-            $sql = "UPDATE animes SET
+            //1 prepare
+            /*$sql = "UPDATE animes SET
                 titulo = '$titulo',
                 nombre_estudio = '$nombre_estudio',
                 anno_estreno = $anno_estreno,
@@ -55,6 +66,22 @@
                 WHERE id_anime = $id_anime
             ";
             $_conexion -> query($sql);
+            
+            https://github.com/public-apis/public-apis
+            
+            */
+            //1 prepare
+            $sql = $_conexion -> prepare ("UPDATE animes SET
+                titulo = ?,
+                nombre_estudio = ?,
+                anno_estreno = ?,
+                num_temporadas = ?
+                WHERE id_anime = ?
+            ");
+            //2 bind
+            $sql -> bind_param("ssiii",$titulo, $nombre_estudio, $anno_estreno,$num_temporadas,$id_anime);
+            //3 execute
+            $sql -> execute ();
         }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
