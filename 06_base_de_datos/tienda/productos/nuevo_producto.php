@@ -8,7 +8,7 @@
     <?php
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
-
+        session_start();
         require('../utiles/conexion.php');
     ?>
     <style>
@@ -21,13 +21,20 @@
 <body>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $tmp_id_producto = $_POST["id_producto"];
+        
         $tmp_nombre = $_POST["nombre"];
         $tmp_precio = $_POST["precio"];
         $tmp_categoria = $_POST["categoria"];
         $tmp_stock = $_POST["stock"];
-        $tmp_imagen = $_POST["imagen"];
+        $imagen =isset($_POST["imagen"]);
         $tmp_descripcion = $_POST["descripcion"];
+
+
+        $imagen = $_FILES["imagen"]["name"];
+            $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
+            $ubicacion_final = "../imagenes/$imagen";
+            move_uploaded_file($ubicacion_temporal, $ubicacion_final);
+
 
         if ($tmp_nombre == '') {
             $error_nombre = "El nombre es obligatorio.";
@@ -47,7 +54,7 @@
         if ($tmp_precio == '') {
             $error_precio = "El precio es obligatorio.";
         } else {
-            $patron_precio = "/^\d{1,4}(\.\d{1,2})?$/";
+            $patron_precio = "/^[0-9]{1,4}(\.[0-9]{1,2})?$/";
             if (!preg_match($patron_precio, $tmp_precio)) {
                 $error_precio = "El precio debe ser un número con 4 dígitos enteros máximo y 2 decimales.";
             } else {
@@ -80,12 +87,6 @@
             }
         }
 
-        /*if ($tmp_imagen == '') {
-            $error_imagen = "La imagen es obligatoria.";
-        } else {
-            $imagen = $tmp_imagen;
-        }*/
-
         if ($tmp_descripcion == '') {
             $error_descripcion = "La descripción es obligatoria.";
         } else {
@@ -97,18 +98,15 @@
         }
 
         if (!isset($error_nombre) && !isset($error_precio) && !isset($error_categoria) && !isset($error_stock) && !isset($error_imagen) && !isset($error_descripcion)) {
-            $sql = "INSERT INTO producto (id_producto, nombre, precio, categoria, stock, imagen, descripcion) 
-                    VALUES ('$tmp_id_producto', '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
+            $sql = "INSERT INTO producto ( nombre, precio, categoria, stock, imagen, descripcion) 
+                    VALUES ( '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
             $_conexion->query($sql);
         }
     }
     ?>
     <h2>Crear producto</h2>
     <form class="col-6" action="" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label class="form-label">ID Producto</label>
-            <input class="form-control" type="text" name="id_producto">
-        </div>
+        
         <br>
         <div class="mb-3">
             <label class="form-label">Nombre</label>
@@ -135,9 +133,8 @@
         </div>
         <br>
         <div class="mb-3">
-            <label class="form-label">Imagen</label>
-            <input class="form-control" type="text" name="imagen">
-            <?php if(isset($error_imagen)) echo "<span class='error'>$error_imagen</span>" ?>
+            <label class="form-label" for="imagen">imagen</label>
+            <input class="form-control" type="file" name="imagen">
         </div>
         <br>
         <div class="mb-3">
