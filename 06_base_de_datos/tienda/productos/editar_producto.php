@@ -24,8 +24,18 @@
         <h1>Editar producto</h1>
         <?php
             $id_producto = $_GET["id_producto"];
-            $sql = "SELECT * FROM producto WHERE id_producto = '$id_producto'";
-            $resultado = $_conexion->query($sql);
+            /*$sql = "SELECT * FROM producto WHERE id_producto = '$id_producto'";
+            $resultado = $_conexion->query($sql);*/
+
+            //1 prepare
+            $sql = $_conexion -> prepare("SELECT * FROM producto WHERE id_producto = ?");
+            //2 bind
+            $sql ->bind_param("i",$id_producto);
+            //3 execute
+            $sql ->execute();
+            //4 retrieve
+            $resultado = $sql -> get_result();
+
             
             while ($fila = $resultado->fetch_assoc()) {
                 $nombre = $fila["nombre"];
@@ -49,7 +59,7 @@
                     $ubicacion_final = "../imagenes/$imagen";
                     move_uploaded_file($ubicacion_temporal, $ubicacion_final);
 
-                $sql = "UPDATE producto SET
+               /* $sql = "UPDATE producto SET
                     nombre = '$nombre',
                     precio = '$precio',
                     categoria = '$categoria',
@@ -58,7 +68,21 @@
                     descripcion = '$descripcion'
                     WHERE id_producto = '$id_producto'
                 ";
-                $_conexion->query($sql);
+                $_conexion->query($sql);*/
+
+                //1 prepare
+                $sql = $_conexion -> prepare("UPDATE producto SET
+                    nombre = ?,
+                    precio = ?,
+                    categoria = ?,
+                    stock = ?,
+                    imagen = ?,
+                    descripcion = ?
+                    WHERE id_producto = ?");
+                //2 bind
+                $sql ->bind_param("sisissi",$nombre,$precio,$categoria,$stock,$imagen,$descripcion,$id_producto);
+                //3 execute
+                $sql ->execute();
             }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">

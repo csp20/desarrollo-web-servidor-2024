@@ -25,8 +25,21 @@
         <?php
             $descripcion = "";
             $categoria = $_GET["categoria"];
-            $sql = "SELECT * FROM categorias WHERE categoria = '$categoria'";
-            $resultado = $_conexion->query($sql);
+            //$sql = "SELECT * FROM categorias WHERE categoria = '$categoria'";
+            //$resultado = $_conexion->query($sql);
+
+            // Preparar la sentencia
+            $sql = $_conexion->prepare("SELECT * FROM categorias WHERE categoria = ?");
+
+            // Vincular el parámetro
+            $sql->bind_param("s", $categoria);
+
+            // Ejecutar la sentencia
+            $sql->execute();
+
+            // Obtener el resultado
+            $resultado = $sql->get_result();
+
 
             while ($fila = $resultado->fetch_assoc()) {
                 $descripcion = $fila["descripcion"];

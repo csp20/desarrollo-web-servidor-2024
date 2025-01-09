@@ -48,16 +48,16 @@
             3 ejecuion
             
             */
-            //1
+            //1 preparacion
             $sql = $_conexion -> prepare("INSERT INTO animes 
             (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
             VALUES (?,?,?,?,?)");
 
-            //2
+            //2 enlace
             $sql -> bind_param("ssiis", 
             $titulo,$nombre_estudio,$anno_estreno,$num_temporadas,$ubicacion_final);
 
-            //3
+            //3 ejecucion
             $sql ->execute();
 
             
@@ -65,6 +65,8 @@
 
         $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
         $resultado = $_conexion -> query($sql);
+
+        
         //close
         $_conexion -> close();
         $estudios = [];

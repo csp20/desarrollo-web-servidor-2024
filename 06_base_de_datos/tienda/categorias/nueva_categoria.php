@@ -55,10 +55,17 @@
         }
 
         if (!isset($error_categoria) && !isset($error_descripcion)) {
-            $sql = "INSERT INTO categorias (categoria, descripcion) 
+            /*$sql = "INSERT INTO categorias (categoria, descripcion) 
                     VALUES ('$categoria', '$descripcion')";
-            $_conexion->query($sql);
-                
+            $_conexion->query($sql);*/
+
+            //1 prepare
+            $sql = $_conexion -> prepare("INSERT INTO categorias (categoria, descripcion) 
+                    VALUES (?,?)");
+            //2 bind
+            $sql ->bind_param("ss",$categoria,$descripcion);
+            //3 execute
+            $sql ->execute();
         }
     }
     ?>

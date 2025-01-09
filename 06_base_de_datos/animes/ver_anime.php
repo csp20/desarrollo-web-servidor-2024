@@ -36,11 +36,11 @@
         $resultado = $_conexion -> query($sql);*/
 
         //1 prepare
-        $sql = $_conexion -> prepare ("SELECT * FROM estudios ORDER BY ?");
+        $sql = $_conexion -> prepare("SELECT * FROM estudios ORDER BY ?");
         //2 bind
         $sql -> bind_param("s", $nombre_estudio);
         //3 execute
-        $sql -> execute ();
+        $sql -> execute();
         //4 retrieve
         $resultado = $sql -> get_result();
 
