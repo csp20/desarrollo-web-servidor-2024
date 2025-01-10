@@ -19,8 +19,17 @@
         
 
         $id_anime = $_GET["id_anime"];
-        $sql = "SELECT * FROM animes WHERE id_anime = $id_anime";
-        $resultado = $_conexion -> query($sql);
+        /*$sql = "SELECT * FROM animes WHERE id_anime = $id_anime";
+        $resultado = $_conexion -> query($sql);*/
+        //1.prepare
+        $sql = $_conexion-> prepare("SELECT * FROM animes WHERE id_anime = $?");
+        //2 binding
+        $sql -> bind_param("i",$id_anime); # i s  d
+        //3 execute
+        $sql -> execute();
+        //4 retrieve 
+        $resultado = $sql -> get_result();
+        
         
         while($fila = $resultado -> fetch_assoc()) {
             $titulo = $fila["titulo"];
@@ -78,7 +87,7 @@
                 num_temporadas = ?
                 WHERE id_anime = ?
             ");
-            //2 bind
+            //2 binding
             $sql -> bind_param("ssiii",$titulo, $nombre_estudio, $anno_estreno,$num_temporadas,$id_anime);
             //3 execute
             $sql -> execute ();

@@ -60,9 +60,18 @@
             }
 
             if (!isset($error_descripcion)) {
-                $sql = "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = '$categoria'";
-                $_conexion->query($sql);
-                    
+                //$sql = "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = '$categoria'";
+                //$_conexion->query($sql);
+
+                //1 prepare
+                $sql = $_conexion->prepare( "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = ?");
+                //2 binding
+                $sql-> bind_param("s", $categoria);
+                //3 execute
+                $sql->execute();
+
+                //cierro
+                $sql = close();
             }
         }
         ?>

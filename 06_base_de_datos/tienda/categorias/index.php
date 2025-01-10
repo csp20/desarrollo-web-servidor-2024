@@ -40,6 +40,7 @@
 
         $sql = "SELECT * FROM categorias";
         $resultado = $_conexion->query($sql);
+        
         ?>
         <table class="table table-striped table-hover">
             <thead class="table-dark">
