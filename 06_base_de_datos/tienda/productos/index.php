@@ -28,12 +28,21 @@
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["fila"])) {
             $fila = $_POST["fila"];
-            $sql = "DELETE FROM producto WHERE id_producto = '$fila'";
-            $_conexion->query($sql);
+            /*$sql = "DELETE FROM producto WHERE id_producto = '$fila'";
+            $_conexion->query($sql);*/
+            //1 prepare
+            $sql = $_conexion-> prepare("DELETE FROM producto WHERE id_producto = '$fila'");
+            //2 bind
+            $sql ->bind_param("i",$fila);
+            //3 
+            $sql -> execute();
+
         }
 
         $sql = "SELECT * FROM producto";
         $resultado = $_conexion->query($sql);
+
+        $conexion -> close();
         ?>
         <table class="table table-striped table-hover">
             <thead class="table-dark">

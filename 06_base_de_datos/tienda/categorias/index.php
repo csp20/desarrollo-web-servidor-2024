@@ -35,12 +35,16 @@
             // 2 Vincular el parámetro
             $sql->bind_param("i",$fila);
             // 3 Ejecutar la sentencia
-            $sql->execute();           
+            $sql->execute();
+            
+            
         }
 
         $sql = "SELECT * FROM categorias";
         $resultado = $_conexion->query($sql);
-        
+
+        $conexion -> close();
+
         ?>
         <table class="table table-striped table-hover">
             <thead class="table-dark">

@@ -66,6 +66,9 @@
             $sql ->bind_param("ss",$categoria,$descripcion);
             //3 execute
             $sql ->execute();
+
+            $conexion->close();
+
         }
     }
     ?>

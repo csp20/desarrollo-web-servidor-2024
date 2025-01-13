@@ -57,8 +57,17 @@
             }
 
             if (isset($error_usuario) && isset($error_contrasena)) {
-                $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
-                $resultado = $_conexion->query($sql);
+                /*$sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
+                $resultado = $_conexion->query($sql);*/
+                //1 prepare
+                $sql = $_conexion -> prepare("SELECT * FROM usuarios WHERE usuario = ?");
+                //bind
+                $sql -> bind_param("s",$usuario);
+                // execute
+                $sql -> execute();
+
+                $_conexion -> close();
+
 
                 if ($resultado->num_rows > 0) {
                     echo "<h2>El nombre de usuario ya existe. Por favor, elige otro.</h2>";

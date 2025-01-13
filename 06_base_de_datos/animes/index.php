@@ -41,9 +41,11 @@
         $sql -> execute();
         }
 
-        
+
         $sql = "SELECT * FROM animes";
         $resultado = $_conexion -> query($sql);
+
+        $conexion -> close();
         /**
          * aplicamos la funcion query a la conexion donde se ejecuta la sentencia sql hecha
          * 

@@ -65,7 +65,6 @@
 
         $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
         $resultado = $_conexion -> query($sql);
-
         
         //close
         $_conexion -> close();

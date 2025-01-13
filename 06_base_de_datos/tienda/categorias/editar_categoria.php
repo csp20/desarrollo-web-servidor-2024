@@ -64,14 +64,14 @@
                 //$_conexion->query($sql);
 
                 //1 prepare
-                $sql = $_conexion->prepare( "UPDATE categorias SET descripcion = '$descripcion' WHERE categoria = ?");
+                $sql = $_conexion->prepare( "UPDATE categorias SET descripcion = ? WHERE categoria = ?");
                 //2 binding
-                $sql-> bind_param("s", $categoria);
+                $sql-> bind_param("ss",$descripcion, $categoria);
                 //3 execute
                 $sql->execute();
 
                 //cierro
-                $sql = close();
+                $conexion -> close();
             }
         }
         ?>

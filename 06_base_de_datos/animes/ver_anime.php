@@ -91,6 +91,8 @@
             $sql -> bind_param("ssiii",$titulo, $nombre_estudio, $anno_estreno,$num_temporadas,$id_anime);
             //3 execute
             $sql -> execute ();
+
+            $conexion -> close();
         }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">

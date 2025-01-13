@@ -83,6 +83,8 @@
                 $sql ->bind_param("sisissi",$nombre,$precio,$categoria,$stock,$imagen,$descripcion,$id_producto);
                 //3 execute
                 $sql ->execute();
+
+                $conexion -> close();
             }
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">

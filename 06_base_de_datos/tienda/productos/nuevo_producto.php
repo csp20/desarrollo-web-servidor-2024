@@ -98,9 +98,18 @@
         }
 
         if (!isset($error_nombre) && !isset($error_precio) && !isset($error_categoria) && !isset($error_stock) && !isset($error_imagen) && !isset($error_descripcion)) {
-            $sql = "INSERT INTO producto ( nombre, precio, categoria, stock, imagen, descripcion) 
+            /*$sql = "INSERT INTO producto ( nombre, precio, categoria, stock, imagen, descripcion) 
                     VALUES ( '$nombre', '$precio', '$categoria', '$stock', '$imagen', '$descripcion')";
-            $_conexion->query($sql);
+            $_conexion->query($sql);*/
+            // prepare
+            $sql = $_conexion->prepare("INSERT INTO producto ( nombre, precio, categoria, stock, imagen, descripcion) 
+                    VALUES ( ?,?,?,?,?,?");
+            //bind
+            $sql -> bind_param("sisiss",$nombre, $precio, $categoria, $stock, $imagen, $descripcion);
+            //ejecute
+            $sql -> execute();
+
+            $_conexion -> close();
         }
     }
     ?>
