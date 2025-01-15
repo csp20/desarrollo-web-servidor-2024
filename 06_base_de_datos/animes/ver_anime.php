@@ -22,7 +22,7 @@
         /*$sql = "SELECT * FROM animes WHERE id_anime = $id_anime";
         $resultado = $_conexion -> query($sql);*/
         //1.prepare
-        $sql = $_conexion-> prepare("SELECT * FROM animes WHERE id_anime = $?");
+        $sql = $_conexion-> prepare("SELECT * FROM animes WHERE id_anime = ?");
         //2 binding
         $sql -> bind_param("i",$id_anime); # i s  d
         //3 execute
@@ -39,19 +39,8 @@
             $imagen = $fila["imagen"];
         }
 
-        //echo "<h1>$titulo</h1>";
-        /*
-        $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
-        $resultado = $_conexion -> query($sql);*/
-
-        //1 prepare
-        $sql = $_conexion -> prepare("SELECT * FROM estudios ORDER BY ?");
-        //2 bind
-        $sql -> bind_param("s", $nombre_estudio);
-        //3 execute
-        $sql -> execute();
-        //4 retrieve
-        $resultado = $sql -> get_result();
+        $sql = "SELECT * FROM estudios ORDER BY  = '$nombre_estudio'";
+            $resultado = $_conexion->query($sql);
 
         $estudios = [];
 
@@ -66,19 +55,6 @@
             $anno_estreno = $_POST["anno_estreno"];
             $num_temporadas = $_POST["num_temporadas"];
 
-            //1 prepare
-            /*$sql = "UPDATE animes SET
-                titulo = '$titulo',
-                nombre_estudio = '$nombre_estudio',
-                anno_estreno = $anno_estreno,
-                num_temporadas = $num_temporadas
-                WHERE id_anime = $id_anime
-            ";
-            $_conexion -> query($sql);
-            
-            https://github.com/public-apis/public-apis
-            
-            */
             //1 prepare
             $sql = $_conexion -> prepare ("UPDATE animes SET
                 titulo = ?,

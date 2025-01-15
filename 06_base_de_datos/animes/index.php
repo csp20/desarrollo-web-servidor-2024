@@ -27,12 +27,9 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
            $id_anime = $_POST["id_anime"];
            echo "<h1>$id_anime</h1>",
-           //borrar anime
-           /*$sql = "DELETE FROM animes WHERE id_anime = $id_anime";
-           $_conexion -> query($sql);*/
         
         //1 prepare
-        $sql = $_conexion -> prepare("DELETE FROM animes WHERE id_anime = ?");
+        $sql = $_conexion->prepare("DELETE FROM animes WHERE id_anime = ?");
 
         //2 bind
         $sql -> bind_param("i",$id_anime);
@@ -46,14 +43,6 @@
         $resultado = $_conexion -> query($sql);
 
         $conexion -> close();
-        /**
-         * aplicamos la funcion query a la conexion donde se ejecuta la sentencia sql hecha
-         * 
-         * el resultado se almacena resultado, que es un objeto con una estrcutita 
-         * parecida a los arrays
-         * 
-         */
-    
         
     ?>
     <table class="table table-striped table-hover">

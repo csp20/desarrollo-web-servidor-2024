@@ -27,27 +27,12 @@
             $nombre_estudio = $_POST["nombre_estudio"];
             $anno_estreno = $_POST["anno_estreno"];
             $num_temporadas = $_POST["num_temporadas"];
-            /**
-             * $_FILES -> que es un array BIDIMENSIONAL
-             */
-            //var_dump($_FILES["imagen"]);
             $nombre_imagen = $_FILES["imagen"]["name"];
             $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
             $ubicacion_final = "./imagenes/$nombre_imagen";
 
             move_uploaded_file($ubicacion_temporal, $ubicacion_final);
-            /*
-            $sql = "INSERT INTO animes (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen) 
-                VALUES ('$titulo', '$nombre_estudio', $anno_estreno, $num_temporadas, '$ubicacion_final')";
-
-            $_conexion -> query($sql);
             
-            3 etapasw de prepared statmente
-            1 prep
-            2 enlaza
-            3 ejecuion
-            
-            */
             //1 preparacion
             $sql = $_conexion -> prepare("INSERT INTO animes 
             (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
@@ -59,8 +44,6 @@
 
             //3 ejecucion
             $sql ->execute();
-
-            
         }
 
         $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
@@ -73,7 +56,6 @@
         while($fila = $resultado -> fetch_assoc()) {
             array_push($estudios, $fila["nombre_estudio"]);
         }
-        //print_r($estudios);
  
         ?>
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
