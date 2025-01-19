@@ -27,12 +27,13 @@
             $nombre_estudio = $_POST["nombre_estudio"];
             $anno_estreno = $_POST["anno_estreno"];
             $num_temporadas = $_POST["num_temporadas"];
+            
             $nombre_imagen = $_FILES["imagen"]["name"];
             $ubicacion_temporal = $_FILES["imagen"]["tmp_name"];
             $ubicacion_final = "./imagenes/$nombre_imagen";
 
             move_uploaded_file($ubicacion_temporal, $ubicacion_final);
-            
+
             //1 preparacion
             $sql = $_conexion -> prepare("INSERT INTO animes 
             (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
