@@ -1,7 +1,7 @@
 <?php
     $_servidor = "localhost";
-    $_usuario = "csp0017";
-    $_contrasena = "Guacamayo32000";
+    $_usuario = "estudiante";
+    $_contrasena = "estudiante";
     $_bd = "consolas_bd";
 
     try {
