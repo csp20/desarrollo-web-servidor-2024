@@ -17,9 +17,9 @@
     *estudio
     * rango del anno_estreno. Si no se ponen los dos rangos (desde y hasta), no se filtra por el año de estreno
 
-    * api_animes?estudio=Mappa
-    * api_animes?desde=2000&hasta=2010
-    * api_animes?desde=2000&hasta=2010&estudio=Diomedéa
+    * api_animes.php?nombre_estudio=OML
+    * api_animes.php?desde=2000&hasta=2010
+    * api_animes.php?desde=2000&hasta=2010&nombre_estudio=Diomedéa
  
      *
      */
@@ -44,18 +44,19 @@
 
     function manejarGet($_conexion) {
         if (isset($_GET["desde"])&& isset($_GET["hasta"]) && isset($_GET["nombre_estudio"])) {
-            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN desde AND hasta";
+            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN :desde AND :hasta";
             $stmt = $_conexion -> prepare($sql);
             $stmt -> execute([
-                "desde" => $_GET["hasta"],
-                "desde" => $_GET["hasta"]
+                "desde" => $_GET["desde"],
+                "hasta" => $_GET["hasta"],
+                "nombre_estudio" => $_GET["nombre_estudio"]
             ]);
         }elseif (isset($_GET["desde"])&& isset($_GET["hasta"])) {
-            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN desde AND hasta";
+            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN :desde AND :hasta";
             $stmt = $_conexion -> prepare($sql);
             $stmt -> execute([
-                "desde" => $_GET["hasta"],
-                "desde" => $_GET["hasta"]
+                "desde" => $_GET["desde"],
+                "hasta" => $_GET["hasta"]
             ]);
         }elseif (isset($_GET["nombre_estudio"])) {
             $sql = "SELECT * FROM animes WHERE nombre_estudio = :nombre_estudio";
@@ -85,7 +86,7 @@
             "num_temporadas" => $entrada["num_temporadas"]
         ]);
         if($stmt) {
-            echo json_encode(["mensaje" => "el estudio se ha insertado correctamente"]);
+            echo json_encode(["mensaje" => "el anime se ha insertado correctamente"]);
         } else {
             echo json_encode(["mensaje" => "error al insertar el estudio"]);
         }

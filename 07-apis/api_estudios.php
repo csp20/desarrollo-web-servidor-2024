@@ -79,11 +79,11 @@
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute([ "nombre_estudio" => $entrada["nombre_estudio"]
     ]);
-           if ($stmt) {
-                echo json_encode(["mensaje" => "el estudio se ha borrado correctamente"]);
-           }else {
-                echo json_encode(["mensaje" => "ERROR, el estudio  NO se ha borrado"]);
-           }
+        if ($stmt) {
+            echo json_encode(["mensaje" => "el estudio se ha borrado correctamente"]);
+        }else {
+            echo json_encode(["mensaje" => "ERROR, el estudio  NO se ha borrado"]);
+        }
     }
 
     function  manejarPut($_conexion, $entrada){
