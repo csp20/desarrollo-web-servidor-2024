@@ -32,7 +32,7 @@
             manejarPost($_conexion, $entrada);
             break;
         case "PUT":
-            echo json_encode(["metodo" => "put"]);
+            manejarPut($_conexion, $entrada);
             break;
         case "DELETE":
             echo json_encode(["metodo" => "delete"]);
@@ -44,7 +44,7 @@
 
     function manejarGet($_conexion) {
         if (isset($_GET["desde"])&& isset($_GET["hasta"]) && isset($_GET["nombre_estudio"])) {
-            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN :desde AND :hasta";
+            $sql = "SELECT * FROM animes WHERE anno_estreno BETWEEN :desde AND :hasta AND nombre_estudio";
             $stmt = $_conexion -> prepare($sql);
             $stmt -> execute([
                 "desde" => $_GET["desde"],
@@ -89,6 +89,27 @@
             echo json_encode(["mensaje" => "el anime se ha insertado correctamente"]);
         } else {
             echo json_encode(["mensaje" => "error al insertar el estudio"]);
+        }
+    }
+    function  manejarPut($_conexion, $entrada){
+        $sql = "UPDATE  animes SET 
+            titulo = :titulo,
+            nombre_estudio = :nombre_estudio,
+            anno_estreno = :anno_estreno,
+            num_temporadas = :num_temporadas 
+            WHERE id_anime = :id_anime";
+        $stmt = $_conexion -> prepare($sql);
+        $stmt -> execute([ 
+            "titulo" => $entrada["titulo"],
+            "nombre_estudio" => $entrada["nombre_estudio"],
+            "anno_estreno" => $entrada["anno_estreno"],
+            "num_temporadas" => $entrada["num_temporadas"],
+            "id_anime" => $entrada["id_anime"]
+    ]);
+        if ($stmt) {
+            echo json_encode(["mensaje" => "el anime se ha actualizado correctamente"]);
+        }else {
+            echo json_encode(["mensaje" => "ERROR, el anime  NO se ha actualizado"]);
         }
     }
 ?>
