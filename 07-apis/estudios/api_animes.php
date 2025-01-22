@@ -21,6 +21,8 @@
     * api_animes.php?desde=2000&hasta=2010
     * api_animes.php?desde=2000&hasta=2010&nombre_estudio=Diomedéa
  
+
+   * sudo apt-get install php-curl
      *
      */
 
