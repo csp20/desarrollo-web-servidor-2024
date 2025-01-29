@@ -18,6 +18,11 @@
     -lista de generos
     trailer  -->
     <?php
+        if (!isset($_GET["id"])) {
+            header("location:top_anime.php");
+        }
+
+
     $id = $_GET["id"];
       $apiURL = "https://api.jikan.moe/v4/anime/$id/full";
 
