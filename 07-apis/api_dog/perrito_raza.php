@@ -29,7 +29,7 @@ $datos = json_decode($respuesta, true);
 $razas = $datos["message"];
 ?> 
 
-<form action="perrito_raza.php" method="post">
+<form action="perrito_raza.php" method="get">
     <label for="perretes">perretes:</label>
     <select id="perretes" name="perretes">
         <?php 
@@ -45,11 +45,12 @@ $razas = $datos["message"];
         ?>
     </select>
     <button type="submit">Pulsar para ver perrito</button>
+    <br><br>
 </form>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $razaSeleccionada = $_POST['perretes'];
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['perretes'])) {
+    $razaSeleccionada = $_GET['perretes'];
     $apiURL = "https://dog.ceo/api/breed/$razaSeleccionada/images/random";
 
     $curl = curl_init();
@@ -66,3 +67,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 </body>
 </html>
+
