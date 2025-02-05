@@ -1,16 +1,11 @@
-<br />
-<font size='1'><table class='xdebug-error xe-uncaught-exception' dir='ltr' border='1' cellspacing='0' cellpadding='1'>
-<tr><th align='left' bgcolor='#f57900' colspan="5"><span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Fatal error: Uncaught PDOException: SQLSTATE[
-    42000
-]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM estudios WHERE nombre_estudio = 'Medac'' at line 1 in /var/www/html/Ejercicios/07-apis/api_estudios.php on line <i>71</i></th></tr>
-<tr><th align='left' bgcolor='#f57900' colspan="5"><span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> PDOException: SQLSTATE[
-    42000
-]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM estudios WHERE nombre_estudio = 'Medac'' at line 1 in /var/www/html/Ejercicios/07-apis/api_estudios.php on line <i>71</i></th></tr>
-<tr><th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th></tr>
-<tr><th align='center' bgcolor='#eeeeec'>#</th><th align='left' bgcolor='#eeeeec'>Time</th><th align='left' bgcolor='#eeeeec'>Memory</th><th align='left' bgcolor='#eeeeec'>Function</th><th align='left' bgcolor='#eeeeec'>Location</th></tr>
-<tr><td bgcolor='#eeeeec' align='center'>1</td><td bgcolor='#eeeeec' align='center'>0.0000</td><td bgcolor='#eeeeec' align='right'>424024</td><td bgcolor='#eeeeec'>{main
-}(  )</td><td title='/var/www/html/Ejercicios/07-apis/api_estudios.php' bgcolor='#eeeeec'>.../api_estudios.php<b>:</b>0</td></tr>
-<tr><td bgcolor='#eeeeec' align='center'>2</td><td bgcolor='#eeeeec' align='center'>0.0028</td><td bgcolor='#eeeeec' align='right'>468440</td><td bgcolor='#eeeeec'>manejarPut( <span>$_conexion = </span><span>class PDO {}</span>, <span>$entrada = </span><span>[&#39;nombre_estudio&#39; =&gt; &#39;Medac&#39;, &#39;ciudad&#39; =&gt; &#39;Sevilla&#39;, &#39;anno_fundacion&#39; =&gt; &#39;2010&#39;
-]</span> )</td><td title='/var/www/html/Ejercicios/07-apis/api_estudios.php' bgcolor='#eeeeec'>.../api_estudios.php<b>:</b>22</td></tr>
-<tr><td bgcolor='#eeeeec' align='center'>3</td><td bgcolor='#eeeeec' align='center'>0.0028</td><td bgcolor='#eeeeec' align='right'>469296</td><td bgcolor='#eeeeec'><a href='http: //www.php.net/PDOStatement.execute' target='_new'>execute</a>( <span>$params = </span><span>[&#39;nombre_estudio&#39; =&gt; &#39;Medac&#39;]</span> )</td><td title='/var/www/html/Ejercicios/07-apis/api_estudios.php' bgcolor='#eeeeec'>.../api_estudios.php<b>:</b>71</td></tr>
-</table></font>
+<!-- 
+La PokéAPI nos ofrece información sobre pokémons. Los pokémons son unos bichitos mágicos que protagonizan la franquicia de videojuegos “Pokémon”. No hace falta que sepas nada de los pokémons para hacer esta práctica, pero si sabes de ellos, quizás te saque una sonrisa cuando la termines y veas a todos los pokémons. Enlace: https://pokeapi.co/ 
+Ejercicio 1: Crea una página llamada pokemons.php que nos muestre una lista con el nombre de los 5 primeros pokémons. El nombre se mostrará con la primera letra de cada palabra que lo componga en mayúscula. Únicamente se solicitarán 5 pokémons a la API.
+Ejercicio 2: Añade, junto al nombre de cada pokémon, su imagen de frente por defecto.
+Ejercicio 3: Añade, junto al nombre de cada pokémon, todos sus tipos separados por un espacio en blanco (fuego, agua, veneno, eléctrico, etc). El tipo se mostrará con la primera letra de cada palabra que lo componga en mayúscula.
+Ejercicio 4: Por defecto se muestran 5 pokémons, pero la API tiene muchos más. Añade enlaces de “Siguiente” y “Anterior” para mostrar los siguientes o anteriores 5 pokémons. Si estamos en la primera página, no se mostrará el botón de “Anterior”.
+Ejercicio 5: Añade un formulario para cambiar el número de pokémons que se muestran. Si se introduce el valor “10”, sólo se pedirán a la API 10 pokémons. Si se le da a “Siguiente” o “Anterior” después de haber cambiado el número de pokémons, en la siguiente o anterior página se mantendrá dicho número también, en lugar de los 5 por defecto.
+Tan sólo puedes hacer 2 preguntas a la profesora durante esta práctica, así que úsalas con sabiduría. Si haces una pregunta que esté claramente contestada en este enunciado, perderás tu pregunta y 1 punto de la práctica.
+A continuación encontrarás un resultado aproximado de cómo quedaría la página terminada. Los pokémons que aparecen no tienen por qué ser los mismos.
+Pista: Para esta práctica puede que necesites hacer varias llamadas a la API.
+ -->
