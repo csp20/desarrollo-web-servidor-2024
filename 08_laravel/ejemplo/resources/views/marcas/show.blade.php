@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Marca</h1>
+    <h2>marca: {{ $marca -> marca }}</h2>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CocheController;
+use App\Http\Controllers\MarcaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +12,13 @@ use App\Http\Controllers\CocheController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
+php artisan route: list
 */
 Route::get('/coches', [CocheController:: class, 'index']);
+
+//Route::get('/marcas', [MarcaController:: class, 'index']);
+
+Route::resource('/marcas', MarcaController:: class);
 
 Route::get('/', function () {
     return view('welcome');
