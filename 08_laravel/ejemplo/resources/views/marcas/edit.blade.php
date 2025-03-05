@@ -7,14 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('marcas.store')}}" method="post">
+    <form action="{{route('marcas.update', ["marcas => $marca -> id"])}}" method="post">
         @csrf 
+        {{method_field("PUT")}}
         <label>Marca:</label>
-        <input type="text" name= "marca" value="{{$marca -> marca}}"><br><br>
+        <input type="text" name= "marca"><br><br>
         <label>año fundacion:</label>
-        <input type="number" name= "ano_fundacion" value="{{$marca -> ano_fundacion}}"><br><br>
+        <input type="number" name= "ano_fundacion"><br><br>
         <label>País:</label>
-        <input type="text" name= "pais" value="{{$marca -> pais}}"><br><br>
+        <input type="text" name= "pais"><br><br>
         <input type="submit" value="Crear">
 
     </form>
