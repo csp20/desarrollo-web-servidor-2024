@@ -23,10 +23,13 @@
     </select>
     <br><br>
 
-    <label for="especie">Especie:</label>
-    <select id="especie" name="especie">
-        <option value="human">Human</option>
-        <option value="saiyan">Saiyan</option>
+    <label for="race">Especie:</label>
+    <select id="race" name="race">
+        <option value="Human">Human</option>
+        <option value="Saiyan">Saiyan</option>
+        <option value="Namekian">namekian</option>
+        <option value="Frieza Race">Frieza Race</option>
+        <option value="Android"> Android</option>
     </select>
     <br><br>
 
@@ -34,12 +37,13 @@
 </form>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cantidad']) && isset($_GET['genero']) && isset($_GET['especie'])) {
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cantidad']) && isset($_GET['genero']) && isset($_GET['race'])) {
     $cantidad = $_GET['cantidad'];
     $genero = $_GET['genero'];
-    $especie = $_GET['especie'];
+    $raza = $_GET['race'];
+    //$origen = $_GET['origin'];
 
-    $apiURL = "https://dragonball-api.com/api/characters?gender=$genero&species=$especie";
+    $apiURL = "https://dragonball-api.com/api/characters?gender=$genero&race=$raza";
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $apiURL);
@@ -55,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cantidad']) && isset($_G
         echo "<div>";
         echo "<h3>" . $personaje["name"] . "</h3>";
         echo "<p>Género: " . $personaje["gender"] . "</p>";
-        echo "<p>Especie: " . $personaje["species"] . "</p>";
-        echo "<p>Origen: " . $personaje["origin"] . "</p>";
-        echo "<img src='" . $personaje["image"] . "' alt='" . $personaje["name"] . "'>";
+        echo "<p>Especie: " . $personaje["race"] . "</p>";
+        //echo "<p>Origen: " . $personaje["origin"] . "</p>";
+        echo "<img height='300px' weight='300px' src='" . $personaje["image"] . "' alt='" . $personaje["name"] . "'>";
         echo "</div><br>";
     }
     echo "</div>";
